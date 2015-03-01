@@ -8,8 +8,8 @@ namespace SS31
 	{
 		private readonly static List<Type> instances; // The list of the activated instances
 
-		private bool disposed;
-		public bool Disposed { get { return disposed; } }
+		private bool _disposed;
+		public bool Disposed { get { return _disposed; } }
 
 		protected Service()
 		{
@@ -18,7 +18,7 @@ namespace SS31
 
 			instances.Add(GetType());
 
-			disposed = false;
+			_disposed = false;
 		}
 		~Service()
 		{
@@ -33,13 +33,13 @@ namespace SS31
 		// Dont forget to call this in base classes
 		public virtual void Dispose(bool disposing)
 		{
-			if (disposed)
+			if (_disposed)
 				return; 
 
 			if (!instances.Contains(GetType()))
 				Logger.LogError("The service " + GetType() + " has no instances on disposal.");
 
-			disposed = true;
+			_disposed = true;
 		}
 
 		static Service()

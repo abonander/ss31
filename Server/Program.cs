@@ -10,8 +10,24 @@ namespace SS31
 			string[] args = Environment.GetCommandLineArgs();
 			processArgs(args);
 
-			SSServer server = new SSServer();
-			server.Initialize();
+			SSServer server = null;
+			try
+			{
+				ServiceManager.Resolve<Logger>();
+				server = new SSServer();
+				if (!server.Initialize())
+				{
+					Logger.LogFatal("Could not initialize the server instance.");
+					return;
+				}
+			}
+			catch (Exception ex)
+			{
+				Logger.LogFatal("Could not initialize the server instance.");
+				Logger.LogException(ex);
+				return;
+			}
+
 			Application.Run(new ServerForm(server));
 		}
 

@@ -24,13 +24,13 @@ namespace SS31
 		public ProfileBlock Parent { get; private set; }
 		public List<ProfileBlock> Children { get; private set; }
 
-		private Timer timer;
+		private Timer _timer;
 		#endregion
 
 		#region Functions
 		internal ProfileBlock(ProfileBlock p, string name)
 		{
-			timer = new Timer();
+			_timer = new Timer();
 			Parent = p;
 			Children = new List<ProfileBlock>();
 			Time = MaxTime = LastTime = LastMaxTime = IntervalTime = IntervalMaxTime = TotalTime = TotalMaxTime = TimeSpan.Zero;
@@ -45,12 +45,12 @@ namespace SS31
 
 		internal void Begin()
 		{
-			timer.Restart();
+			_timer.Restart();
 			++Count;
 		}
 		internal void End()
 		{
-			TimeSpan t = timer.Elapsed;
+			TimeSpan t = _timer.Elapsed;
 			if (t > MaxTime)
 				MaxTime = t;
 			Time += t;
@@ -102,17 +102,17 @@ namespace SS31
 	public class Profiler : Service
 	{
 		#region Members
-		private ProfileBlock root;
-		private ProfileBlock current;
-		private int intervalFrames;
-		private int totalFrames;
+		private ProfileBlock _root;
+		private ProfileBlock _current;
+		private int _intervalFrames;
+		private int _totalFrames;
 		#endregion
 
 		#region Functions
 		public Profiler()
 		{
-			current = root = new ProfileBlock(null, "Root");
-			intervalFrames = totalFrames = 0;
+			_current = _root = new ProfileBlock(null, "Root");
+			_intervalFrames = _totalFrames = 0;
 		}
 
 		public override void Dispose(bool disposing)
@@ -125,15 +125,15 @@ namespace SS31
 
 		public void BeginBlock(string name)
 		{
-			current = current.GetChild(name);
-			current.Begin();
+			_current = _current.GetChild(name);
+			_current.Begin();
 		}
 		public void EndBlock()
 		{
-			if (root != current)
+			if (_root != _current)
 			{
-				current.End();
-				current = current.Parent;
+				_current.End();
+				_current = _current.Parent;
 			}
 		}
 
@@ -144,22 +144,22 @@ namespace SS31
 		}
 		public void EndFrame()
 		{
-			if (current != root)
+			if (_current != _root)
 			{
 				EndBlock();
-				++intervalFrames;
-				++totalFrames;
-				if (totalFrames == 0)
-					++totalFrames;
-				root.EndFrame();
-				current = root;
+				++_intervalFrames;
+				++_totalFrames;
+				if (_totalFrames == 0)
+					++_totalFrames;
+				_root.EndFrame();
+				_current = _root;
 			}
 		}
 
 		public void BeginInterval()
 		{
-			root.BeginInterval();
-			intervalFrames = 0;
+			_root.BeginInterval();
+			_intervalFrames = 0;
 		}
 
 		public override string ToString()

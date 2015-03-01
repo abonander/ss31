@@ -24,38 +24,45 @@ namespace SS31
 				"Info", "Warn", "ERROR", "FATAL"
 			};
 
-		private static StreamWriter s_logStream;
-		private static event MessageLoggedHandler s_logEvent;
-		private static bool s_isOpen = false;
-		public static bool IsOpen { get { return s_isOpen; } private set { s_isOpen = value; } }
+		private static StreamWriter logStream;
+		private static event MessageLoggedHandler logEvent;
+		private static object mutex;
+		private static bool isOpen = false;
+		public static bool IsOpen { get { return isOpen; } private set { isOpen = value; } }
 
 		private static void open(NetSide side)
 		{
-			if (IsOpen)
-			{
-				Log(LogLevel.Warning, "The log was opened twice.");
-				return;
-			}
+			if (mutex == null)
+				mutex = new object();
 
-			try
+			lock (mutex)
 			{
-				s_logStream = new StreamWriter(File.Open(side == NetSide.Client ? "client.log" : "server.log", FileMode.Create, FileAccess.ReadWrite, FileShare.None));
+				if (IsOpen)
+				{
+					Log(LogLevel.Warning, "The log was opened twice.");
+					return;
+				}
+				
+				try
+				{
+					logStream = new StreamWriter(File.Open(side == NetSide.Client ? "client.log" : "server.log", FileMode.Create, FileAccess.ReadWrite, FileShare.None));
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine("Could not open the log file for the client. Given reason: ");
+					Console.WriteLine(e.Message);
+					logStream = null;
+				}
+				
+				if (logStream == null)
+				{
+					isOpen = false;
+					return;
+				}
+				isOpen = true;
+				
+				logStream.Write(getFileHeader() + "\n\n");
 			}
-			catch (Exception e)
-			{
-				Console.WriteLine("Could not open the log file for the client. Given reason:");
-				Console.WriteLine(e.Message);
-				s_logStream = null;
-			}
-
-			if (s_logStream == null)
-			{
-				s_isOpen = false;
-				return;
-			}
-			s_isOpen = true;
-
-			s_logStream.Write(getFileHeader() + "\n\n");
 		}
 
 		public static void Close()
@@ -63,8 +70,11 @@ namespace SS31
 			if (!IsOpen)
 				return;
 
-			s_logStream.Close();
-			s_isOpen = false;
+			lock (mutex)
+			{
+				logStream.Close();
+				isOpen = false;
+			}
 			// TODO: Log the total runtime before closing.
 		}
 
@@ -80,12 +90,36 @@ namespace SS31
 
 			string log = ll + ts + ":\t" + mes;
 			Console.WriteLine(log);
-			s_logStream.Write(log + "\n");
+			lock (mutex)
+			{
+				logStream.Write(log + "\n");
+			}
+		}
+
+		public static void LogException(Exception e)
+		{
+			if (!IsOpen)
+				return;
+
+			string ts = "[" + getTimeStamp() + "]";
+			string mes =
+				"\tMessage: \"" + e.Message + "\"\n" + 
+				"\tStack Trace:\n" + 
+				"\t" + e.StackTrace.Replace("\n", "\n\t\t");
+
+			dispatchEvent(LogLevel.Fatal, ts, mes);
+
+			string log = "[EXCEPTION]" + ts + ":\n" + mes;
+			Console.WriteLine(log);
+			lock (mutex)
+			{
+				logStream.Write(log + "\n");
+			}
 		}
 
 		public static void SubscribeToMessageEvent(MessageLoggedHandler mlh)
 		{
-			s_logEvent += mlh;
+			logEvent += mlh;
 		}
 
 		#region Easy Log Functions
@@ -107,8 +141,8 @@ namespace SS31
 
 		private static void dispatchEvent(LogLevel lvl, string ts, string mes)
 		{
-			if (s_logEvent != null)
-				s_logEvent(lvl, ts, mes);
+			if (logEvent != null)
+				logEvent(lvl, ts, mes);
 		}
 
 		public Logger()

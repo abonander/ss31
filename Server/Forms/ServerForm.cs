@@ -24,6 +24,7 @@ namespace SS31
 				// TODO: Stop the server gracefully
 			}
 
+			ServiceManager.UnregisterAll();
 			base.OnFormClosing(e);
 		}
 
