@@ -43,6 +43,8 @@
     <Compile Include="..\..\Client\Properties\AssemblyInfo.cs" />
     <Compile Include="..\..\Client\Program.cs" />
     <Compile Include="..\..\Client\Client.cs" />
+    <Compile Include="..\..\Client\Scene\Scene.cs" />
+    <Compile Include="..\..\Client\Scene\SceneManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ss31common.csproj">
@@ -52,5 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Client\packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="..\..\Client\Scene\" />
   </ItemGroup>
 </Project>
