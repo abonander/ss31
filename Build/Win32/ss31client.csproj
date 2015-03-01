@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="..\..\Client\Properties\AssemblyInfo.cs" />
     <Compile Include="..\..\Client\Program.cs" />
+    <Compile Include="..\..\Client\Client.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ss31common.csproj">

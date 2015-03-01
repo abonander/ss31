@@ -6,15 +6,17 @@ namespace SS31
 	// Base class for objects that act as global singleton services, like Profiler
 	public abstract class Service : IDisposable
 	{
-		private static Dictionary<Type, int> instances; // The number of instances of this service type
+		private readonly static List<Type> instances; // The list of the activated instances
 
 		private bool disposed;
 		public bool Disposed { get { return disposed; } }
 
 		protected Service()
 		{
-			if (instances[GetType()]++ > 0)
+			if (instances.Contains(GetType()))
 				throw new InvalidOperationException("More than one instance of the service " + GetType() + " is not allowed.");
+
+			instances.Add(GetType());
 
 			disposed = false;
 		}
@@ -27,7 +29,6 @@ namespace SS31
 		{
 			Dispose(true);
 			GC.SuppressFinalize(this);
-			Logger.LogInfo("Service Unregistered: " + GetType());
 		}
 		// Dont forget to call this in base classes
 		public virtual void Dispose(bool disposing)
@@ -35,7 +36,7 @@ namespace SS31
 			if (disposed)
 				return; 
 
-			if (--instances[GetType()] < 0)
+			if (!instances.Contains(GetType()))
 				Logger.LogError("The service " + GetType() + " has no instances on disposal.");
 
 			disposed = true;
@@ -43,7 +44,7 @@ namespace SS31
 
 		static Service()
 		{
-			instances = new Dictionary<Type, int>();
+			instances = new List<Type>();
 		}
 	}
 }

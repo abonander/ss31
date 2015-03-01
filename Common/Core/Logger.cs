@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 
 namespace SS31
 {
@@ -110,9 +111,12 @@ namespace SS31
 				s_logEvent(lvl, ts, mes);
 		}
 
-		public Logger(NetSide ns)
+		public Logger()
 		{
-			open(ns);
+			if (Assembly.GetEntryAssembly().GetName().Name.Contains("client"))
+				open(NetSide.Client);
+			else
+				open(NetSide.Server);
 		}
 
 		public override void Dispose(bool disposing)

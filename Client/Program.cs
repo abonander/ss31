@@ -6,6 +6,15 @@ namespace SS31
 	{
 		static void Main()
 		{
+			string[] args = Environment.GetCommandLineArgs();
+			processArgs(args);
+
+			using (SSClient client = new SSClient())
+				client.Run();
+		}
+
+		static void processArgs(string[] args)
+		{
 
 		}
 	}

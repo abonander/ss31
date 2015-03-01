@@ -47,6 +47,7 @@
     <Compile Include="..\..\Common\Service\ServiceManager.cs" />
     <Compile Include="..\..\Common\Service\Profiler.cs" />
     <Compile Include="..\..\Common\Core\Timer.cs" />
+    <Compile Include="..\..\Common\Core\Exception.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Common\packages.config" />
