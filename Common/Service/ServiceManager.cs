@@ -101,6 +101,7 @@ namespace SS31
 		static ServiceManager()
 		{
 			registeredServices = new Dictionary<Type, Service>();
+			RegisterService(new ServiceManager());
 		}
 	}
 }

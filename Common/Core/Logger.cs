@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.IO;
 
 namespace SS31
@@ -16,7 +16,7 @@ namespace SS31
 	// Passes the log level of the message, the time stamp in the format "[H:mm:ss]", and the message itself.
 	public delegate void MessageLoggedHandler(LogLevel lvl, string ts, string mes);
 
-	public static class Logger
+	public class Logger : Service
 	{
 		private static readonly string[] s_levelText = new string[]
 			{
@@ -28,7 +28,7 @@ namespace SS31
 		private static bool s_isOpen = false;
 		public static bool IsOpen { get { return s_isOpen; } private set { s_isOpen = value; } }
 
-		public static void Open(NetSide side)
+		private static void open(NetSide side)
 		{
 			if (IsOpen)
 			{
@@ -108,6 +108,18 @@ namespace SS31
 		{
 			if (s_logEvent != null)
 				s_logEvent(lvl, ts, mes);
+		}
+
+		public Logger(NetSide ns)
+		{
+			open(ns);
+		}
+
+		public override void Dispose(bool disposing)
+		{
+			base.Dispose(disposing);
+
+			Close();
 		}
 	}
 }
