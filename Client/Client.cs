@@ -10,6 +10,8 @@ namespace SS31
 		public SpriteBatch SpriteBatch { get; private set; }
 
 		private Profiler _profiler;
+		private SceneManager _sceneManager;
+		private InputManager _inputManager;
 
 		public SSClient() :
 			base()
@@ -29,6 +31,8 @@ namespace SS31
 			Logger.LogInfo("Initializing the game.");
 
 			// TODO: Initialize things
+			(_sceneManager = ServiceManager.Resolve<SceneManager>()).Initialize(this);
+			_inputManager = ServiceManager.Resolve<InputManager>();
 
 			base.Initialize();
 			_profiler.EndBlock();
@@ -52,6 +56,8 @@ namespace SS31
 			_profiler.BeginBlock("BaseUpdate");
 
 			// TODO: Update things
+			_inputManager.Update(gameTime);
+			_sceneManager.Update(gameTime);
 
 			base.Update(gameTime);
 			_profiler.EndBlock();
@@ -63,6 +69,7 @@ namespace SS31
 			_profiler.BeginBlock("BaseDraw");
 
 			// TODO: Draw things
+			_sceneManager.Draw(gameTime);
 
 			base.Draw(gameTime);
 			_profiler.EndBlock();
@@ -73,6 +80,7 @@ namespace SS31
 			Logger.LogInfo("Exiting the game.");
 
 			// TODO: Cleanup things that require cleaning
+			ServiceManager.UnregisterService<SceneManager>(); // Clean up the scene manager first, to release objects that other managers may need released to shut down
 
 			ServiceManager.UnregisterAll();
 			base.OnExiting(sender, args);

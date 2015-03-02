@@ -45,6 +45,9 @@
     <Compile Include="..\..\Client\Client.cs" />
     <Compile Include="..\..\Client\Scene\Scene.cs" />
     <Compile Include="..\..\Client\Scene\SceneManager.cs" />
+    <Compile Include="..\..\Client\Input\Mouse.cs" />
+    <Compile Include="..\..\Client\Input\Event.cs" />
+    <Compile Include="..\..\Client\Input\InputManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ss31common.csproj">
@@ -57,5 +60,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="..\..\Client\Scene\" />
+    <Folder Include="..\..\Client\Input\" />
   </ItemGroup>
 </Project>
