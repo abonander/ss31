@@ -48,11 +48,15 @@
     <Compile Include="..\..\Common\Core\Timer.cs" />
     <Compile Include="..\..\Common\Core\Exception.cs" />
     <Compile Include="..\..\Common\Service\Logger.cs" />
+    <Compile Include="..\..\Common\Network\INetManager.cs" />
+    <Compile Include="..\..\Common\Network\IncomingNetMessageArgs.cs" />
+    <Compile Include="..\..\Common\Network\IPEntry.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Common\packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="..\..\Common\Core\" />
+    <Folder Include="..\..\Common\Network\" />
   </ItemGroup>
 </Project>
