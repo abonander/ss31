@@ -2,7 +2,7 @@
 using Lidgren.Network;
 using Microsoft.Xna.Framework;
 
-namespace SS31.Network
+namespace SS31.Common.Network
 {
 	public interface INetManager
 	{

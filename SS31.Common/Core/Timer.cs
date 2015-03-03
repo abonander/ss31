@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace SS31
+namespace SS31.Common
 {
 	// Wrapper for the System.Diagnostics.Stopwatch class
 	public class Timer

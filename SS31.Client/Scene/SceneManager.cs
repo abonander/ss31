@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using SS31.Common;
 
-namespace SS31
+namespace SS31.Client
 {
 	public class SceneManager : Service
 	{

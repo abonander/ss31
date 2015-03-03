@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
+using SS31.Common;
 
-namespace SS31
+namespace SS31.Server
 {
 	public class ServerForm : Form
 	{

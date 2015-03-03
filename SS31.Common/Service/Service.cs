@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SS31
+namespace SS31.Common
 {
 	// Base class for objects that act as global singleton services, like Profiler
 	public abstract class Service : IDisposable

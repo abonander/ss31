@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
 
-namespace SS31
+namespace SS31.Common
 {
 	// Pseudo-static class that holds and provides access to the Services for the game.
 	// Analysis disable once ConvertToStaticType

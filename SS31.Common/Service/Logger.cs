@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace SS31
+namespace SS31.Common
 {
 	public enum LogLevel : 
 		byte

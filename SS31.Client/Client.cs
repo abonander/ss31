@@ -1,8 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SS31.Common;
 
-namespace SS31
+namespace SS31.Client
 {
 	public class SSClient : Game
 	{

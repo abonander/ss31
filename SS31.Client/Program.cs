@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SS31
+namespace SS31.Client
 {
 	public class Program
 	{

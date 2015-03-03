@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace SS31
+namespace SS31.Client
 {
 	public delegate void KeyEvent(Keys key, KeyboardState current, KeyboardState last);
 

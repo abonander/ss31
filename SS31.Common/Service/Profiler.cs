@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SS31
+namespace SS31.Common
 {
 	public class ProfileBlock
 	{

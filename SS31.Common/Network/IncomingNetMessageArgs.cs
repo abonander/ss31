@@ -1,7 +1,7 @@
 ﻿using System;
 using Lidgren.Network;
 
-namespace SS31.Network
+namespace SS31.Common.Network
 {
 	public class IncomingNetMessageArgs : EventArgs
 	{

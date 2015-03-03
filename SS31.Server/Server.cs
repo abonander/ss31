@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SS31
+namespace SS31.Server
 {
 	public class SSServer
 	{

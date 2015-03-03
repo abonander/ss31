@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SS31.Network
+namespace SS31.Common.Network
 {
 	public struct IPEntry
 	{

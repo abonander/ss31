@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Input;
 
-namespace SS31
+namespace SS31.Client
 {
 	[Flags]
 	public enum MouseButton

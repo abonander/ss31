@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SS31
+namespace SS31.Common
 {
 	public sealed class NoPublicConstructorException : Exception
 	{

@@ -1,9 +1,10 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using SS31.Common;
 
-namespace SS31
+namespace SS31.Client
 {
 	// Higher level input class, provides support for both polling and event based input
 	public class InputManager : Service
