@@ -6,7 +6,7 @@ namespace SS31.Client
 {
 	// Base class that represents a "scene" in the game, only one can be active at a time.
 	// For allowing different states, i.e. "Main Menu" -> "Multiplayer Menu" -> "In Game" ect.
-	public abstract class Scene : IDisposable
+	public abstract class State : IDisposable
 	{
 		public string TypeName { get { return GetType().ToString(); } }
 
@@ -68,7 +68,7 @@ namespace SS31.Client
 		}
 		#endregion
 
-		protected Scene()
+		protected State()
 		{
 			_isInitialized = false;
 			_isCurrent = false;
@@ -76,7 +76,7 @@ namespace SS31.Client
 			_isDisposed = false;
 			_game = null;
 		}
-		~Scene()
+		~State()
 		{
 			Dispose(false);
 		}

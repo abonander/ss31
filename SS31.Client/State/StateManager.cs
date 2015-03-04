@@ -7,23 +7,23 @@ using SS31.Common;
 
 namespace SS31.Client
 {
-	public class SceneManager : Service
+	public class StateManager : Service
 	{
 		#region Members
-		private Dictionary<Type, Scene> _cachedScenes;
+		private Dictionary<Type, State> _cachedScenes;
 		private SSClient _client; // The client to create new scenes with
 		private Profiler _profiler;
 
 		private bool _changeQueued; // If a scene change will be made at the end of this frame.
 		private Type _typeQueued; // The type of scene that will be switched to.
 
-		public Scene ActiveScene { get; private set; }
+		public State ActiveScene { get; private set; }
 		public bool HasScene { get { return ActiveScene != null; } }
 		#endregion
 
-		public SceneManager()
+		public StateManager()
 		{
-			_cachedScenes = new Dictionary<Type, Scene>();
+			_cachedScenes = new Dictionary<Type, State>();
 			_changeQueued = false;
 			_typeQueued = null;
 			ActiveScene = null;
@@ -54,21 +54,21 @@ namespace SS31.Client
 			return cached;
 		}
 
-		public bool HasCachedType<T>() where T : Scene
+		public bool HasCachedType<T>() where T : State
 		{
 			return _cachedScenes.ContainsKey(typeof(T));
 		}
-		public void DeleteCachedType<T>() where T : Scene
+		public void DeleteCachedType<T>() where T : State
 		{
 			Type type = typeof(T);
 			if (!_cachedScenes.ContainsKey(type))
 				throw new ArgumentException("The scene manager cannot delete the requested scene type, because it is not cached.");
 
-			Scene delete = _cachedScenes[type];
+			State delete = _cachedScenes[type];
 			_cachedScenes.Remove(type);
 			delete.Dispose();
 		}
-		public Scene GetCachedType<T>() where T : Scene
+		public State GetCachedType<T>() where T : State
 		{
 			Type type = typeof(T);
 
@@ -137,7 +137,7 @@ namespace SS31.Client
 				if (pinfo.Any())
 					throw new InvalidConstructorParameterException("Subclasses of Scene must have a zero-argument constructor.");
 
-				Scene ns = (Scene)Activator.CreateInstance(_typeQueued);
+				State ns = (State)Activator.CreateInstance(_typeQueued);
 				ns.Game = _client;
 				ns.DoInitialize();
 				_cachedScenes[_typeQueued] = ns;
@@ -145,7 +145,7 @@ namespace SS31.Client
 			}
 			else
 			{
-				Scene ns = _cachedScenes[_typeQueued];
+				State ns = _cachedScenes[_typeQueued];
 				ns.DoResume();
 				ActiveScene = ns;
 			}

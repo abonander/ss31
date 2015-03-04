@@ -4,8 +4,6 @@ namespace SS31.Common.Network
 {
 	public struct IPEntry
 	{
-		public const ushort SS_DEFAULT_PORT = 8100;
-
 		public byte N1;
 		public byte N2;
 		public byte N3;
@@ -13,7 +11,7 @@ namespace SS31.Common.Network
 		public ushort Port;
 
 		public string IPString { get { return String.Format("{0}.{1}.{2}.{3}", N1, N2, N3, N4); } }
-		public bool IsLAN { get { return N1 == 192 && N2 == 168; } }
+		public bool IsLAN { get { return false; } } // TODO: Compare to the local network (dont assume 192.168.*.*)
 		public bool IsLocal { get { return N1 == 127 && N2 == 0 && N3 == 0 && N4 == 1; } }
 
 		// Must have a format of "XXX.XXX.X[XX].X[XX][:XXXXX]"
@@ -47,9 +45,9 @@ namespace SS31.Common.Network
 				}
 			}
 			else
-				Port = SS_DEFAULT_PORT;
+				Port = SharedConstants.SS_DEFAULT_PORT;
 		}
-		public IPEntry(byte n1, byte n2, byte n3, byte n4, ushort port = SS_DEFAULT_PORT)
+		public IPEntry(byte n1, byte n2, byte n3, byte n4, ushort port = SharedConstants.SS_DEFAULT_PORT)
 		{
 			N1 = n1;
 			N2 = n2;

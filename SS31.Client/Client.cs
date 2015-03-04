@@ -12,7 +12,7 @@ namespace SS31.Client
 		public SpriteBatch SpriteBatch { get; private set; }
 
 		private Profiler _profiler;
-		private SceneManager _sceneManager;
+		private StateManager _stateManager;
 		private InputManager _inputManager;
 
 		private NetManager _netManager;
@@ -34,7 +34,7 @@ namespace SS31.Client
 			_profiler.BeginBlock("Initialization");
 			Logger.LogInfo("Initializing the game.");
 
-			(_sceneManager = ServiceManager.Resolve<SceneManager>()).Initialize(this);
+			(_stateManager = ServiceManager.Resolve<StateManager>()).Initialize(this);
 			_inputManager = ServiceManager.Resolve<InputManager>();
 			_netManager = ServiceManager.Resolve<NetManager>();
 
@@ -61,7 +61,7 @@ namespace SS31.Client
 
 			_netManager.Update(gameTime);
 			_inputManager.Update(gameTime);
-			_sceneManager.Update(gameTime);
+			_stateManager.Update(gameTime);
 
 			base.Update(gameTime);
 			_profiler.EndBlock();
@@ -72,7 +72,7 @@ namespace SS31.Client
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 			_profiler.BeginBlock("BaseDraw");
 
-			_sceneManager.Draw(gameTime);
+			_stateManager.Draw(gameTime);
 
 			base.Draw(gameTime);
 			_profiler.EndBlock();
@@ -83,7 +83,7 @@ namespace SS31.Client
 			Logger.LogInfo("Exiting the game.");
 
 			// TODO: Cleanup things that require cleaning
-			ServiceManager.UnregisterService<SceneManager>(); // Clean up the scene manager first, to release objects that other managers may need released to shut down
+			ServiceManager.UnregisterService<StateManager>(); // Clean up the scene manager first, to release objects that other managers may need released to shut down
 
 			ServiceManager.UnregisterAll();
 			base.OnExiting(sender, args);
