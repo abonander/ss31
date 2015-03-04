@@ -12,6 +12,10 @@ namespace SS31.Common.Network
 		public byte N4;
 		public ushort Port;
 
+		public string IPString { get { return String.Format("{0}.{1}.{2}.{3}", N1, N2, N3, N4); } }
+		public bool IsLAN { get { return N1 == 192 && N2 == 168; } }
+		public bool IsLocal { get { return N1 == 127 && N2 == 0 && N3 == 0 && N4 == 1; } }
+
 		// Must have a format of "XXX.XXX.X[XX].X[XX][:XXXXX]"
 		public IPEntry(string s)
 		{
@@ -45,7 +49,6 @@ namespace SS31.Common.Network
 			else
 				Port = SS_DEFAULT_PORT;
 		}
-
 		public IPEntry(byte n1, byte n2, byte n3, byte n4, ushort port = SS_DEFAULT_PORT)
 		{
 			N1 = n1;
@@ -53,6 +56,18 @@ namespace SS31.Common.Network
 			N3 = n3;
 			N4 = n4;
 			Port = port;
+		}
+
+		public override string ToString()
+		{
+			return String.Format("{0}.{1}.{2}.{3}:{4}", N1, N2, N3, N4, Port);
+		}
+
+		// This is nowhere near a perfect hash function. In fact, it will start to collide for any ip addresses that have the same first three numbers.
+		// But for now, it will work.
+		public override int GetHashCode()
+		{
+			return ((int)(N1 << 24) & (int)(N2 << 16) & (int)(N3 << 8) & (int)(N4)) + Port.GetHashCode();
 		}
 	}
 }

@@ -8,6 +8,7 @@ namespace SS31.Common.Network
 	{
 		NetPeerStatistics Stats { get; }
 		NetClient NetClient { get; }
+		IPEntry GlobalIp { get; } // The global internet IP for this machine
 		bool IsConnected { get; }
 		long Uid { get; }
 
@@ -16,10 +17,11 @@ namespace SS31.Common.Network
 		event EventHandler<IncomingNetMessageArgs> OnMessageRecieved;
 
 		void Update(GameTime gameTime);
+
 		void Connect(IPEntry ip);
 		void Disconnect();
-		NetOutgoingMessage CreateMessage();
 
+		NetOutgoingMessage CreateMessage();
 		void SendMessage(NetOutgoingMessage message, NetDeliveryMethod method);
 	}
 }

@@ -51,6 +51,7 @@
     <Compile Include="..\..\SS31.Common\Network\INetManager.cs" />
     <Compile Include="..\..\SS31.Common\Network\IncomingNetMessageArgs.cs" />
     <Compile Include="..\..\SS31.Common\Network\IPEntry.cs" />
+    <Compile Include="..\..\SS31.Common\Core\SharedConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\SS31.Common\packages.config" />

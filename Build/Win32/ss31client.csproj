@@ -48,6 +48,7 @@
     <Compile Include="..\..\SS31.Client\Input\Mouse.cs" />
     <Compile Include="..\..\SS31.Client\Input\Event.cs" />
     <Compile Include="..\..\SS31.Client\Input\InputManager.cs" />
+    <Compile Include="..\..\SS31.Client\Network\NetManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ss31common.csproj">
@@ -61,5 +62,6 @@
   <ItemGroup>
     <Folder Include="..\..\SS31.Client\Scene\" />
     <Folder Include="..\..\SS31.Client\Input\" />
+    <Folder Include="..\..\SS31.Client\Network\" />
   </ItemGroup>
 </Project>

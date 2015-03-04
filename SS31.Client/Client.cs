@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SS31.Common;
+using SS31.Client.Network;
 
 namespace SS31.Client
 {
@@ -13,6 +14,8 @@ namespace SS31.Client
 		private Profiler _profiler;
 		private SceneManager _sceneManager;
 		private InputManager _inputManager;
+
+		private NetManager _netManager;
 
 		public SSClient() :
 			base()
@@ -31,9 +34,9 @@ namespace SS31.Client
 			_profiler.BeginBlock("Initialization");
 			Logger.LogInfo("Initializing the game.");
 
-			// TODO: Initialize things
 			(_sceneManager = ServiceManager.Resolve<SceneManager>()).Initialize(this);
 			_inputManager = ServiceManager.Resolve<InputManager>();
+			_netManager = ServiceManager.Resolve<NetManager>();
 
 			base.Initialize();
 			_profiler.EndBlock();
@@ -56,7 +59,7 @@ namespace SS31.Client
 			_profiler.BeginFrame(); // This will also end the previous frame
 			_profiler.BeginBlock("BaseUpdate");
 
-			// TODO: Update things
+			_netManager.Update(gameTime);
 			_inputManager.Update(gameTime);
 			_sceneManager.Update(gameTime);
 
@@ -69,7 +72,6 @@ namespace SS31.Client
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 			_profiler.BeginBlock("BaseDraw");
 
-			// TODO: Draw things
 			_sceneManager.Draw(gameTime);
 
 			base.Draw(gameTime);
