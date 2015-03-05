@@ -132,7 +132,7 @@ namespace SS31.Client
 			Dispose(true);
 			GC.SuppressFinalize(this);
 		}
-		public void Dispose(bool disposing)
+		public virtual void Dispose(bool disposing)
 		{
 			if (IsDisposed)
 				return;

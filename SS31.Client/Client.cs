@@ -38,6 +38,9 @@ namespace SS31.Client
 			_inputManager = ServiceManager.Resolve<InputManager>();
 			_netManager = ServiceManager.Resolve<NetManager>();
 
+			// TODO: Switch this out when we get an actual main menu system and whatnot going
+			_stateManager.SwitchTo<GameState>();
+
 			base.Initialize();
 			_profiler.EndBlock();
 		}
