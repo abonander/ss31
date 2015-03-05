@@ -42,16 +42,17 @@
   <ItemGroup>
     <Compile Include="..\..\SS31.Common\Properties\AssemblyInfo.cs" />
     <Compile Include="..\..\SS31.Common\Core\NetSide.cs" />
-    <Compile Include="..\..\SS31.Common\Service\Service.cs" />
     <Compile Include="..\..\SS31.Common\Service\ServiceManager.cs" />
-    <Compile Include="..\..\SS31.Common\Service\Profiler.cs" />
     <Compile Include="..\..\SS31.Common\Core\Timer.cs" />
     <Compile Include="..\..\SS31.Common\Core\Exception.cs" />
-    <Compile Include="..\..\SS31.Common\Service\Logger.cs" />
     <Compile Include="..\..\SS31.Common\Network\INetManager.cs" />
     <Compile Include="..\..\SS31.Common\Network\IncomingNetMessageArgs.cs" />
     <Compile Include="..\..\SS31.Common\Network\IPEntry.cs" />
     <Compile Include="..\..\SS31.Common\Core\SharedConstants.cs" />
+    <Compile Include="..\..\SS31.Common\Service\IGameService.cs" />
+    <Compile Include="..\..\SS31.Common\Service\GameService.cs" />
+    <Compile Include="..\..\SS31.Common\Logger.cs" />
+    <Compile Include="..\..\SS31.Common\Profiler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\SS31.Common\packages.config" />
@@ -59,5 +60,6 @@
   <ItemGroup>
     <Folder Include="..\..\SS31.Common\Core\" />
     <Folder Include="..\..\SS31.Common\Network\" />
+    <Folder Include="..\..\SS31.Common\Service\" />
   </ItemGroup>
 </Project>

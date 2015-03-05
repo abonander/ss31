@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
 
-namespace SS31.Common
+namespace SS31.Common.Service
 {
-	// Pseudo-static class that holds and provides access to the Services for the game.
-	// Analysis disable once ConvertToStaticType
 	public static class ServiceManager
 	{
-		private readonly static Dictionary<Type, Service> registeredServices;
+		private readonly static Dictionary<Type, IGameService> registeredServices;
 
-		public static void UnregisterService<T>() where T : Service
+		public static void UnregisterService<T>() where T : IGameService
 		{
 			Type type = typeof(T);
 			if (!registeredServices.ContainsKey(type))
@@ -30,7 +28,7 @@ namespace SS31.Common
 				if (type == loggerType)
 					continue; // We want to remove the logger last, so the other services can use it while they are disposing.
 
-				Service s = registeredServices[type];
+				IGameService s = registeredServices[type];
 				s.Dispose();
 			}
 			Logger logger = (Logger)registeredServices[loggerType];
@@ -38,12 +36,12 @@ namespace SS31.Common
 			registeredServices.Clear();
 		}
 
-		public static bool HasService<T>() where T : Service
+		public static bool HasService<T>() where T : IGameService
 		{
 			return registeredServices.ContainsKey(typeof(T));
 		}
 			
-		public static T Resolve<T>() where T : Service
+		public static T Resolve<T>() where T : IGameService
 		{
 			Type t = typeof(T);
 			if (!registeredServices.ContainsKey(t))
@@ -56,7 +54,7 @@ namespace SS31.Common
 				if (pinfo.Any())
 					throw new InvalidConstructorParameterException("The service constructors cannot have any arguments.");
 
-				Service inst = Activator.CreateInstance<T>();
+				IGameService inst = Activator.CreateInstance<T>();
 				registeredServices.Add(t, inst);
 			}
 
@@ -65,7 +63,7 @@ namespace SS31.Common
 			
 		static ServiceManager()
 		{
-			registeredServices = new Dictionary<Type, Service>();
+			registeredServices = new Dictionary<Type, IGameService>();
 		}
 	}
 }

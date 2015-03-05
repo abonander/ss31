@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SS31.Common.Service;
 
 namespace SS31.Common
 {
@@ -99,7 +100,7 @@ namespace SS31.Common
 		#endregion
 	}
 
-	public class Profiler : Service
+	public class Profiler : GameService
 	{
 		#region Members
 		private ProfileBlock _root;

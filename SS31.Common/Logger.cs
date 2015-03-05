@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using SS31.Common.Service;
 
 namespace SS31.Common
 {
@@ -17,7 +18,7 @@ namespace SS31.Common
 	// Passes the log level of the message, the time stamp in the format "[H:mm:ss]", and the message itself.
 	public delegate void MessageLoggedHandler(LogLevel lvl, string ts, string mes);
 
-	public class Logger : Service
+	public class Logger : GameService
 	{
 		private static readonly string[] s_levelText = new string[]
 			{
@@ -30,7 +31,7 @@ namespace SS31.Common
 		private static bool isOpen = false;
 		public static bool IsOpen { get { return isOpen; } private set { isOpen = value; } }
 
-		private static void open(NetSide side)
+		public static void Open(NetSide side)
 		{
 			if (mutex == null)
 				mutex = new object();
@@ -143,21 +144,6 @@ namespace SS31.Common
 		{
 			if (logEvent != null)
 				logEvent(lvl, ts, mes);
-		}
-
-		public Logger()
-		{
-			if (Assembly.GetEntryAssembly().GetName().Name.Contains("client"))
-				open(NetSide.Client);
-			else
-				open(NetSide.Server);
-		}
-
-		public override void Dispose(bool disposing)
-		{
-			base.Dispose(disposing);
-
-			Close();
 		}
 	}
 }

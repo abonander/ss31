@@ -52,8 +52,8 @@ namespace SS31.Server
 			TimeSpan total = _timer.Elapsed;
 			TimeSpan delta = total - _lastTime;
 			float deltaSec = (float)delta.TotalMilliseconds;
-			if (deltaSec < ServerRate && (ServerRate - deltaSec) >= 0.5f)
-				return; // If still have over half a millisecond before we are supposed to update again
+			if (deltaSec < ServerRate && (ServerRate - deltaSec) >= 0.2f)
+				return; // If still have over fifth a millisecond before we are supposed to update again
 
 			GameTime gameTime = new GameTime(total, delta);
 
@@ -65,6 +65,7 @@ namespace SS31.Server
 			_lastTime = total;
 		}
 
+		// Updates the title with general relative information
 		private void updateTitle(GameTime gameTime)
 		{
 			if ((gameTime.TotalGameTime - _lastTitleUpdate).TotalSeconds >= 0.5f)
@@ -74,9 +75,17 @@ namespace SS31.Server
 			}
 		}
 
+		// Message pump, reads through them and dispatches them as necessary
 		private void updateNetwork(GameTime gameTime)
 		{
-			
+			NetIncomingMessage msg;
 		}
+
+		#region Packet Handling
+		private void handleData(NetIncomingMessage msg)
+		{
+
+		}
+		#endregion
 	}
 }
