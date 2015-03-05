@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/ss31/ss31.png?label=ready&title=Ready)](https://waffle.io/ss31/ss31)
 ## ss31 ##
 Remake of the cult classic Space Station 13, now with C# and [Monogame](http://www.monogame.net/), made cross platform by the [Mono Framework](http://www.mono-project.com/).
 
