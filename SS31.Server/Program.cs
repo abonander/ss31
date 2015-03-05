@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Forms;
 using SS31.Common;
 
 namespace SS31.Server
@@ -14,7 +13,7 @@ namespace SS31.Server
 			SSServer server = null;
 			try
 			{
-				ServiceManager.Resolve<Logger>();
+				ServiceManager.Resolve<Logger>(); // Start up the logger
 				server = new SSServer();
 				if (!server.Initialize())
 				{
@@ -26,10 +25,21 @@ namespace SS31.Server
 			{
 				Logger.LogFatal("Could not initialize the server instance.");
 				Logger.LogException(ex);
-				return;
+				Environment.Exit(-1);
 			}
 
-			Application.Run(new ServerForm(server));
+			try
+			{
+				server.Run();
+			}
+			catch(Exception e)
+			{
+				Logger.LogFatal("An exception went unhandled while the program was running!");
+				Logger.LogException(e);
+				Environment.Exit(-1);
+			}
+
+			ServiceManager.UnregisterAll();
 		}
 
 		static void processArgs(string[] args)

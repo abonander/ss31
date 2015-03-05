@@ -19,7 +19,7 @@ namespace SS31.Client
 		{
 			if (!IsDisposed && disposing)
 			{
-				if (ServiceManager.HasService(NetManager))
+				if (ServiceManager.HasService<NetManager>())
 					ServiceManager.Resolve<NetManager>().OnMessageRecieved -= handleNetworkMessage;
 			}
 

@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="..\..\SS31.Server\Properties\AssemblyInfo.cs" />
     <Compile Include="..\..\SS31.Server\Program.cs" />
-    <Compile Include="..\..\SS31.Server\Forms\ServerForm.cs" />
     <Compile Include="..\..\SS31.Server\Server.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -54,8 +53,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\SS31.Server\packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="..\..\SS31.Server\Forms\" />
   </ItemGroup>
 </Project>
