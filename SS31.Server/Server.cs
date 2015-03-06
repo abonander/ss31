@@ -161,7 +161,12 @@ namespace SS31.Server
 		{
 			if ((NetMessageType)msg.ReadByte() == NetMessageType.PlainText)
 			{
-				Logger.LogInfo("Message: \"" + msg.ReadString() + "\"");
+				string s = msg.ReadString();
+				Logger.LogInfo("Client: \"" + s + "\"");
+				NetOutgoingMessage m = ServiceManager.Resolve<SSNetServer>().CreateMessage();
+				m.Write((byte)NetMessageType.PlainText);
+				m.Write("You pressed: " + s);
+				ServiceManager.Resolve<SSNetServer>().SendMessage(m, msg.SenderConnection);
 			}
 		}
 

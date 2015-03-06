@@ -31,7 +31,12 @@ namespace SS31.Client
 
 		void handleNetworkMessage(object sender, IncomingNetMessageArgs args)
 		{
-
+			if (args.Message.MessageType == NetIncomingMessageType.Data)
+			{
+				NetMessageType type = (NetMessageType)args.Message.ReadByte();
+				if (type == NetMessageType.PlainText)
+					Console.WriteLine("Server: \"" + args.Message.ReadString() + "\"");
+			}
 		}
 
 		void handleKeyDown(Keys key, KeyboardState p, KeyboardState c)
