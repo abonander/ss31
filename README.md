@@ -7,6 +7,7 @@ Social
 -
 
 Find us on Reddit: [/r/SS31](http://www.reddit.com/r/SS31).
+Come join our Gitter: [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/ss31)
 
 Authors
 -
