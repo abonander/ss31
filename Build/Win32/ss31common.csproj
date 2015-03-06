@@ -52,6 +52,7 @@
     <Compile Include="..\..\SS31.Common\SharedConstants.cs" />
     <Compile Include="..\..\SS31.Common\Utility\Exception.cs" />
     <Compile Include="..\..\SS31.Common\NetSide.cs" />
+    <Compile Include="..\..\SS31.Common\Network\NetEnums.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\SS31.Common\packages.config" />

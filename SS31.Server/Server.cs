@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Lidgren.Network;
 using SS31.Common;
 using SS31.Common.Service;
+using SS31.Common.Network;
 
 namespace SS31.Server
 {
@@ -27,6 +28,7 @@ namespace SS31.Server
 		public SSServer()
 		{
 			Initialized = false;
+			Running = false;
 
 			ClientList = new Dictionary<NetConnection, Client>();
 
@@ -56,6 +58,20 @@ namespace SS31.Server
 			return ClientList[conn];
 		}
 		#endregion
+
+		public void Restart()
+		{
+			Logger.LogWarning("RESTARTING SERVER...");
+			// TODO: Let players know that we are restarting
+			DisposeForRestart();
+			// TODO: Restart into the lobby
+		}
+
+		public void DisposeForRestart()
+		{
+			// TODO: Dispose and empty all of the world and entity related managers
+			GC.Collect();
+		}
 
 		public void Run()
 		{
@@ -143,7 +159,10 @@ namespace SS31.Server
 		// Handle data packets (custom user packets)
 		private void handleData(NetIncomingMessage msg)
 		{
-
+			if ((NetMessageType)msg.ReadByte() == NetMessageType.PlainText)
+			{
+				Logger.LogInfo("Message: \"" + msg.ReadString() + "\"");
+			}
 		}
 
 		// Handle status change packets (client connecting or disconnecting)
