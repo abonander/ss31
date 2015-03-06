@@ -53,6 +53,8 @@
     <Compile Include="..\..\SS31.Common\Utility\Exception.cs" />
     <Compile Include="..\..\SS31.Common\NetSide.cs" />
     <Compile Include="..\..\SS31.Common\Network\NetEnums.cs" />
+    <Compile Include="..\..\SS31.Common\Utility\IConfiguration.cs" />
+    <Compile Include="..\..\SS31.Common\Utility\ConfigManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\SS31.Common\packages.config" />
