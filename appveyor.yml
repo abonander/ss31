@@ -1,0 +1,6 @@
+version: 1.0.{build}
+before_build:
+- nuget restore SS31.Common\packages.config -SolutionDirectory Build\Win32\
+build:
+  project: Build/Win32/Win32.sln
+  verbosity: minimal
