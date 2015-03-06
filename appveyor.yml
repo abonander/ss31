@@ -4,3 +4,6 @@ before_build:
 build:
   project: Build/Win32/Win32.sln
   verbosity: minimal
+notifications:
+  - provider: WebHook
+    url: https://webhooks.gitter.im/e/1c2308e6bba4830f5db6
