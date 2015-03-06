@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SS31.Common;
 using SS31.Client.Network;
+using SS31.Common.Service;
 
 namespace SS31.Client
 {

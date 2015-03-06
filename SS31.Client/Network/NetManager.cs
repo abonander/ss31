@@ -1,12 +1,13 @@
 ﻿using System;
 using SS31.Common.Network;
 using SS31.Common;
+using SS31.Common.Service;
 using Lidgren.Network;
 using Microsoft.Xna.Framework;
 
 namespace SS31.Client.Network
 {
-	public class NetManager : Service, INetManager
+	public class NetManager : GameService, INetManager
 	{
 		#region Members
 		private readonly NetPeerConfiguration _netConfig;

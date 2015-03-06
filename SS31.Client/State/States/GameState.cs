@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using SS31.Common;
+using SS31.Common.Service;
 using SS31.Client.Network;
 using SS31.Common.Network;
 

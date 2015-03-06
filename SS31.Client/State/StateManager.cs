@@ -4,10 +4,11 @@ using System.Reflection;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using SS31.Common;
+using SS31.Common.Service;
 
 namespace SS31.Client
 {
-	public class StateManager : Service
+	public class StateManager : GameService
 	{
 		#region Members
 		private Dictionary<Type, State> _cachedScenes;

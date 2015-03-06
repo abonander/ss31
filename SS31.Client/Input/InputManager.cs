@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using SS31.Common;
+using SS31.Common.Service;
 
 namespace SS31.Client
 {
 	// Higher level input class, provides support for both polling and event based input
-	public class InputManager : Service
+	public class InputManager : GameService
 	{
 		#region Members
 		public KeyboardState PreviousKeyState { get; private set; }
