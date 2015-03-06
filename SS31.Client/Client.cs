@@ -25,7 +25,7 @@ namespace SS31.Client
 			Content.RootDirectory = "Content";
 
 			// This will create the Logger and Profiler instances
-			ServiceManager.Resolve<Logger>();
+			ServiceManager.Resolve<Logger>().Open(NetSide.Client);
 			_profiler = ServiceManager.Resolve<Profiler>();
 		}
 

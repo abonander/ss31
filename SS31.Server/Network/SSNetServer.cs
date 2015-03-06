@@ -2,32 +2,47 @@
 using System.Collections.Generic;
 using Lidgren.Network;
 using SS31.Common;
+using SS31.Common.Service;
 
 namespace SS31.Server
 {
-	public class SSNetServer : Service
+	public class SSNetServer : NetServer, IGameService
 	{
-		private NetServer _server; // The server that this wraps
+		private bool _disposed;
+		public bool Disposed { get { return _disposed; } }
 
-		#region Properties
-		public NetPeerStatus Status { get { return _server.Status; } }
-		public long Uid { get { return _server.UniqueIdentifier; } }
-		public int Port { get { return _server.Port; } }
-		public NetUPnP UPnP { get { return _server.UPnP; } }
-		public object Tag { get { return _server.Tag; } set { _server.Tag = value; } }
-		public List<NetConnection> Connections { get { return _server.Connections; } }
-		public int ConnectionsCount { get { return _server.ConnectionsCount; } }
-		public NetPeerStatistics Statistics { get { return _server.Statistics; } }
-		public NetPeerConfiguration Configuration { get { return _server.Configuration; } }
-		public PlatformSocket Socket { get { return _server.Socket; } }
-		#endregion
-
-		public SSNetServer()
+		public SSNetServer() :
+			base(loadConfig())
 		{
-			_server = new NetServer(loadConfig());
+			_disposed = false;
+		}
+		~SSNetServer()
+		{
+			Dispose(false);
 		}
 
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+		public void Dispose(bool disposing)
+		{
+			// TODO: See if something needs to be disposed here later.
+		}
 
+		public void SendToAll(NetOutgoingMessage m)
+		{
+			SendToAll(m, NetDeliveryMethod.ReliableOrdered);
+		}
+		public void SendMessage(NetOutgoingMessage m, NetConnection client)
+		{
+			SendMessage(m, client, NetDeliveryMethod.ReliableOrdered);
+		}
+		public void SendToMany(NetOutgoingMessage m, List<NetConnection> clients)
+		{
+			SendMessage(m, clients, NetDeliveryMethod.ReliableOrdered, 0);
+		}
 
 		#region Config
 		// TODO: Actually make this load from the configuration manager

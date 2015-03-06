@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Lidgren.Network;
 using SS31.Common;
+using SS31.Common.Service;
 
 namespace SS31.Server
 {
@@ -79,10 +80,44 @@ namespace SS31.Server
 		private void updateNetwork(GameTime gameTime)
 		{
 			NetIncomingMessage msg;
+			SSNetServer server = ServiceManager.Resolve<SSNetServer>();
+			while ((msg = server.ReadMessage()) != null)
+			{
+				switch (msg.MessageType)
+				{
+					case NetIncomingMessageType.DebugMessage:
+					case NetIncomingMessageType.VerboseDebugMessage:
+						Logger.LogInfo(msg.ReadString());
+						break;
+					case NetIncomingMessageType.WarningMessage:
+						Logger.LogWarning(msg.ReadString());
+						break;
+					case NetIncomingMessageType.ErrorMessage:
+						Logger.LogError(msg.ReadString());
+						break;
+					case NetIncomingMessageType.Data:
+						handleData(msg); // TODO: Make sure this data is from a valid connection
+						break;
+					case NetIncomingMessageType.StatusChanged:
+						handleStatusChange(msg);
+						break;
+					default:
+						Logger.LogError("An unhandled message was recieved: " + msg.MessageType);
+						break;
+				}
+				server.Recycle(msg);
+			}
 		}
 
 		#region Packet Handling
+		// Handle data packets (custom user packets)
 		private void handleData(NetIncomingMessage msg)
+		{
+
+		}
+
+		// Handle status change packets (client connecting or disconnecting)
+		private void handleStatusChange(NetIncomingMessage msg)
 		{
 
 		}

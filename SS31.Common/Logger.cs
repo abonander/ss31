@@ -31,7 +31,7 @@ namespace SS31.Common
 		private static bool isOpen = false;
 		public static bool IsOpen { get { return isOpen; } private set { isOpen = value; } }
 
-		public static void Open(NetSide side)
+		public void Open(NetSide side)
 		{
 			if (mutex == null)
 				mutex = new object();
@@ -66,7 +66,7 @@ namespace SS31.Common
 			}
 		}
 
-		public static void Close()
+		public void Close()
 		{
 			if (!IsOpen)
 				return;

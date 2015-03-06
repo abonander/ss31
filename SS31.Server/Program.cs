@@ -14,12 +14,12 @@ namespace SS31.Server
 			SSServer server = null;
 			try
 			{
-				ServiceManager.Resolve<Logger>(); // Start up the logger
+				ServiceManager.Resolve<Logger>().Open(NetSide.Server); // Start up the logger
 				server = new SSServer();
 				if (!server.Initialize())
 				{
 					Logger.LogFatal("Could not initialize the server instance.");
-					return;
+					Environment.Exit(-1);
 				}
 			}
 			catch (Exception ex)
