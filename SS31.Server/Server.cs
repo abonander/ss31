@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Lidgren.Network;
 using SS31.Common;
@@ -14,17 +15,27 @@ namespace SS31.Server
 		public uint TickRate { get; private set; } // The number of times the server should update every second
 		public float ServerRate { get { return 1000.0f / TickRate; } } // The time each update should take (in milliseconds)
 
+		public Dictionary<NetConnection, Client> ClientList;
+
 		private Stopwatch _timer;
 		private TimeSpan _lastTime;
 		private TimeSpan _lastTitleUpdate;
+
+		private int _lastSentBytes; // Number of bytes sent in the last title update
+		private int _lastRecvBytes; // NUmber of bytes recieved in the last title update
 
 		public SSServer()
 		{
 			Initialized = false;
 
+			ClientList = new Dictionary<NetConnection, Client>();
+
 			_timer = new Stopwatch();
 			_lastTime = TimeSpan.Zero;
 			_lastTitleUpdate = TimeSpan.Zero;
+
+			_lastSentBytes = 0;
+			_lastRecvBytes = 0;
 		}
 
 		public bool Initialize()
@@ -39,10 +50,20 @@ namespace SS31.Server
 			return true;
 		}
 
+		#region Accessors
+		public Client GetClient(NetConnection conn)
+		{
+			return ClientList[conn];
+		}
+		#endregion
+
 		public void Run()
 		{
 			_timer.Restart();
 			Running = true;
+
+			ServiceManager.Resolve<SSNetServer>().Start();
+			Logger.LogInfo(String.Format("Server running. Listening on port: {0:D}", ServiceManager.Resolve<SSNetServer>().Port));
 
 			while (Running)
 				mainLoop();
@@ -71,7 +92,15 @@ namespace SS31.Server
 		{
 			if ((gameTime.TotalGameTime - _lastTitleUpdate).TotalSeconds >= 0.5f)
 			{
-				Console.Title = string.Format("TPS: {0:N2}", 1.0f / gameTime.ElapsedGameTime.TotalSeconds);
+				NetPeerStatistics stats = ServiceManager.Resolve<SSNetServer>().Statistics;
+				int dSent = (_lastSentBytes - stats.SentBytes);
+				int dRecv = (_lastRecvBytes - stats.ReceivedBytes);
+				_lastSentBytes = stats.SentBytes;
+				_lastRecvBytes = stats.ReceivedBytes;
+
+				Console.Title = string.Format("SS31 Server - TPS: {0:N2} | Net: (S: {1:N0} KiB/s, R: {2:N0} KiB/s) | Mem: {3:N0} KiB", 
+					1.0f / gameTime.ElapsedGameTime.TotalSeconds, (dSent >> 10) / 2, (dRecv >> 10) / 2,
+					Process.GetCurrentProcess().PrivateMemorySize64 >> 10);
 				_lastTitleUpdate = gameTime.TotalGameTime;
 			}
 		}
@@ -96,7 +125,8 @@ namespace SS31.Server
 						Logger.LogError(msg.ReadString());
 						break;
 					case NetIncomingMessageType.Data:
-						handleData(msg); // TODO: Make sure this data is from a valid connection
+						if (ClientList.ContainsKey(msg.SenderConnection))
+							handleData(msg); 
 						break;
 					case NetIncomingMessageType.StatusChanged:
 						handleStatusChange(msg);
@@ -119,7 +149,34 @@ namespace SS31.Server
 		// Handle status change packets (client connecting or disconnecting)
 		private void handleStatusChange(NetIncomingMessage msg)
 		{
+			NetConnection conn = msg.SenderConnection;
+			string sip = conn.RemoteEndpoint.Address.ToString();
+			Logger.LogInfo(sip + ": STATUS CHANGE");
 
+			switch (conn.Status)
+			{
+				case NetConnectionStatus.Connected:
+					Logger.LogInfo(sip + ": CONNECTION REQUEST");
+					if (ClientList.ContainsKey(conn))
+					{
+						Logger.LogWarning(sip + "(" + ClientList[conn].PlayerName + "): already connected.");
+						return;
+					}
+					// TODO: When the ban manager is implemented, here is where we would reject a banned connection
+					// TODO: Implement the player manager, and then let it know that someone connected
+					ClientList.Add(conn, new Client(conn));
+					Logger.LogInfo(sip + ": CONNECTED");
+					break;
+				case NetConnectionStatus.Disconnected:
+					if (ClientList.ContainsKey(conn))
+						Logger.LogInfo(sip + "(" + ClientList[conn].PlayerName + "): DISCONNECTED");
+					else
+						Logger.LogInfo(sip + ": DISCONNECTED");
+					// TODO: Let the player manager know that the client has disconnected
+					if (ClientList.ContainsKey(conn))
+						ClientList.Remove(conn);
+					break;
+			}
 		}
 		#endregion
 	}

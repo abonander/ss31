@@ -45,6 +45,7 @@
     <Compile Include="..\..\SS31.Server\Program.cs" />
     <Compile Include="..\..\SS31.Server\Server.cs" />
     <Compile Include="..\..\SS31.Server\Network\SSNetServer.cs" />
+    <Compile Include="..\..\SS31.Server\Network\Client.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ss31common.csproj">
