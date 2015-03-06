@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using SS31.Common.Service;
+using System.Diagnostics;
 
 namespace SS31.Common
 {
@@ -25,13 +26,13 @@ namespace SS31.Common
 		public ProfileBlock Parent { get; private set; }
 		public List<ProfileBlock> Children { get; private set; }
 
-		private Timer _timer;
+		private Stopwatch _timer;
 		#endregion
 
 		#region Functions
 		internal ProfileBlock(ProfileBlock p, string name)
 		{
-			_timer = new Timer();
+			_timer = new Stopwatch();
 			Parent = p;
 			Children = new List<ProfileBlock>();
 			Time = MaxTime = LastTime = LastMaxTime = IntervalTime = IntervalMaxTime = TotalTime = TotalMaxTime = TimeSpan.Zero;
