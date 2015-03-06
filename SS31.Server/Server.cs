@@ -159,14 +159,11 @@ namespace SS31.Server
 		// Handle data packets (custom user packets)
 		private void handleData(NetIncomingMessage msg)
 		{
-			if ((NetMessageType)msg.ReadByte() == NetMessageType.PlainText)
+			switch ((NetMessageType)msg.ReadByte())
 			{
-				string s = msg.ReadString();
-				Logger.LogInfo("Client: \"" + s + "\"");
-				NetOutgoingMessage m = ServiceManager.Resolve<SSNetServer>().CreateMessage();
-				m.Write((byte)NetMessageType.PlainText);
-				m.Write("You pressed: " + s);
-				ServiceManager.Resolve<SSNetServer>().SendMessage(m, msg.SenderConnection);
+				default:
+					Logger.LogWarning("Unhandled message type.");
+					break;
 			}
 		}
 
