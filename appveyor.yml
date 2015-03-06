@@ -6,4 +6,4 @@ build:
   verbosity: minimal
 notifications:
   - provider: Webhook
-    url: https://webhooks.gitter.im/e/1c2308e6bba4830f5db6
+    url: https://webhooks.gitter.im/e/765a5ded59064b8968a2
