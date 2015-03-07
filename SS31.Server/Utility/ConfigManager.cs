@@ -1,20 +1,20 @@
 ﻿using System;
-using System.Xml.Serialization;
 using System.IO;
+using System.Xml.Serialization;
 using SS31.Common.Utility;
 using SS31.Common;
 
-namespace SS31.Client.Utility
+namespace SS31.Server.Utility
 {
-	public class ClientConfigManager : ConfigManager<ClientConfiguration>
+	public class ServerConfigManager : ConfigManager<ServerConfiguration>
 	{
 		public override void Initialize(string file)
 		{
 			if (File.Exists(file))
 			{
-				XmlSerializer loader = new XmlSerializer(typeof(ClientConfiguration));
+				XmlSerializer loader = new XmlSerializer(typeof(ServerConfiguration));
 				StreamReader reader = File.OpenText(file);
-				ClientConfiguration config = (ClientConfiguration)loader.Deserialize(reader);
+				ServerConfiguration config = (ServerConfiguration)loader.Deserialize(reader);
 				reader.Close();
 				Configuration = config;
 				ConfigFile = file;
@@ -22,7 +22,7 @@ namespace SS31.Client.Utility
 			else
 			{
 				Logger.LogError("Could not load the configuration file: \"" + file + "\". Creating default file and using default settings.");
-				Configuration = new ClientConfiguration();
+				Configuration = new ServerConfiguration();
 				ConfigFile = file;
 				Save();
 			}
@@ -30,7 +30,7 @@ namespace SS31.Client.Utility
 
 		public override void Save()
 		{
-			XmlSerializer saver = new XmlSerializer(typeof(ClientConfiguration));
+			XmlSerializer saver = new XmlSerializer(typeof(ServerConfiguration));
 			StreamWriter writer = File.CreateText(ConfigFile);
 			saver.Serialize(writer, Configuration);
 			writer.Flush();
