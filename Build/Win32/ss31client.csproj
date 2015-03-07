@@ -36,7 +36,6 @@
     <Reference Include="Lidgren.Network">
       <HintPath>packages\MonoGame.Binaries.3.2.0\build\net40\Lidgren.Network.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="..\Build\Win32\packages\MonoGame.Binaries.3.2.0\build\net40\MonoGame.Binaries.targets" Condition="Exists('..\Build\Win32\packages\MonoGame.Binaries.3.2.0\build\net40\MonoGame.Binaries.targets')" />
@@ -51,8 +50,6 @@
     <Compile Include="..\..\SS31.Client\State\State.cs" />
     <Compile Include="..\..\SS31.Client\State\StateManager.cs" />
     <Compile Include="..\..\SS31.Client\State\States\GameState.cs" />
-    <Compile Include="..\..\SS31.Client\Utility\ClientConfiguration.cs" />
-    <Compile Include="..\..\SS31.Client\Utility\ConfigManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ss31common.csproj">
@@ -68,6 +65,5 @@
     <Folder Include="..\..\SS31.Client\Network\" />
     <Folder Include="..\..\SS31.Client\State\" />
     <Folder Include="..\..\SS31.Client\State\States\" />
-    <Folder Include="..\..\SS31.Client\Utility\" />
   </ItemGroup>
 </Project>

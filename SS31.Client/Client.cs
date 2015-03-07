@@ -37,6 +37,7 @@ namespace SS31.Client
 
 			(_stateManager = ServiceManager.Resolve<StateManager>()).Initialize(this);
 			_inputManager = ServiceManager.Resolve<InputManager>();
+
 			_netManager = ServiceManager.Resolve<NetManager>();
 
 			// TODO: Switch this out when we get an actual main menu system and whatnot going
