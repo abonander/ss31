@@ -36,6 +36,11 @@
     <Reference Include="Lidgren.Network">
       <HintPath>packages\MonoGame.Binaries.3.2.0\build\net40\Lidgren.Network.dll</HintPath>
     </Reference>
+    <Reference Include="YamlDotNet">
+      <HintPath>packages\YamlDotNet.3.5.1\lib\net35\YamlDotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="..\Build\Win32\packages\MonoGame.Binaries.3.2.0\build\net40\MonoGame.Binaries.targets" Condition="Exists('..\Build\Win32\packages\MonoGame.Binaries.3.2.0\build\net40\MonoGame.Binaries.targets')" />
@@ -53,6 +58,8 @@
     <Compile Include="..\..\SS31.Common\NetSide.cs" />
     <Compile Include="..\..\SS31.Common\Network\NetEnums.cs" />
     <Compile Include="..\..\SS31.Common\Utility\Exception.cs" />
+    <Compile Include="..\..\SS31.Common\Config\IConfiguration.cs" />
+    <Compile Include="..\..\SS31.Common\Config\ConfigSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\SS31.Common\packages.config" />
@@ -61,5 +68,6 @@
     <Folder Include="..\..\SS31.Common\Network\" />
     <Folder Include="..\..\SS31.Common\Service\" />
     <Folder Include="..\..\SS31.Common\Utility\" />
+    <Folder Include="..\..\SS31.Common\Config\" />
   </ItemGroup>
 </Project>
