@@ -34,7 +34,7 @@ namespace SS31.Server.Config
 
 		public SerializeAs GetSerializeType()
 		{
-			return SerializeAs.Json;
+			return SerializeAs.Yaml;
 		}
 
 		private void onValueChange(string name, object oldVal, object newVal)
