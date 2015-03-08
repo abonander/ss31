@@ -8,6 +8,7 @@ using SS31.Common.Service;
 
 namespace SS31.Client
 {
+	// The base class for the game. Monogame handles initialization and updating this.
 	public class SSClient : Game
 	{
 		public GraphicsDeviceManager Graphics { get; private set; }
@@ -19,6 +20,8 @@ namespace SS31.Client
 
 		private NetManager _netManager;
 
+		// Not much should ever happen here. Put the initialization stuff in initialize.
+		// Methods are called as such: Initialize() -> LoadContent() -> { Update(), Draw() }(repeated) -> OnExiting()
 		public SSClient() :
 			base()
 		{
@@ -30,6 +33,8 @@ namespace SS31.Client
 			_profiler = ServiceManager.Resolve<Profiler>();
 		}
 
+		// Do all of the initialization steps for the game. All graphics changes should be done here, as the window
+		// opens for the first time right after this method returns.
 		protected override void Initialize()
 		{
 			_profiler.BeginInterval();
@@ -54,6 +59,8 @@ namespace SS31.Client
 			_profiler.EndBlock();
 		}
 
+		// Not much use for this yet, as we will probably go with loading content as it is needed.
+		// Maybe get the gui content loaded here in the future.
 		protected override void LoadContent()
 		{
 			_profiler.BeginBlock("Content Loading");
@@ -66,6 +73,7 @@ namespace SS31.Client
 			_profiler.EndBlock();
 		}
 
+		// Base update function, updates the network, input, and then the active state
 		protected override void Update(GameTime gameTime)
 		{
 			_profiler.BeginFrame(); // This will also end the previous frame
@@ -79,6 +87,7 @@ namespace SS31.Client
 			_profiler.EndBlock();
 		}
 
+		// Base draw function, draws the active state, and soon the GUI system
 		protected override void Draw(GameTime gameTime)
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -90,6 +99,7 @@ namespace SS31.Client
 			_profiler.EndBlock();
 		}
 
+		// Called when the game exits. Right now just unregisters services.
 		protected override void OnExiting(object sender, EventArgs args)
 		{
 			Logger.LogInfo("Exiting the game.");

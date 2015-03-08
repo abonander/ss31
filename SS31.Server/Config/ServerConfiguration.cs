@@ -4,6 +4,7 @@ using SS31.Common.Config;
 
 namespace SS31.Server.Config
 {
+	// General settings specific to the server
 	public class ServerConfiguration : IConfiguration
 	{
 		public event HandleConfigValueChange OnValueChange;

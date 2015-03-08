@@ -1,4 +1,4 @@
-version: 0.0.{build}
+version: 0.1.{build}
 before_build:
 - nuget restore SS31.Common\packages.config -SolutionDirectory Build\Win32\
 build:

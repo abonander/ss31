@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Input;
 
 namespace SS31.Client
 {
+	// Since Monogame does not have an enum for mouse buttons, we will make our own.
+	// Does work as flags.
 	[Flags]
 	public enum MouseButton
 	{
@@ -14,6 +16,8 @@ namespace SS31.Client
 		X2 = 0x10
 	}
 
+	// Contains methods to get the state mapped from our MouseButton enum and the mouse buttons in the
+	// passed MouseState.
 	public static class MouseButtonExtensions
 	{
 		public static ButtonState GetMappedState(this MouseButton button, MouseState state)

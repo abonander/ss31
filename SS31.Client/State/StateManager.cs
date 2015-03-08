@@ -8,6 +8,7 @@ using SS31.Common.Service;
 
 namespace SS31.Client
 {
+	// Manages the active state and a list of cached states
 	public class StateManager : GameService
 	{
 		#region Members
@@ -39,7 +40,10 @@ namespace SS31.Client
 			_client = c;
 		}
 
-		public bool SwitchTo<T>()
+		// Queue a state change to the T state at the end of this frame.
+		// If the type T is cached, it will use that one, else, it will create a new instance of T and use that.
+		// It will also cache the active state, if the state's ShouldSuspend is true.
+		public bool SwitchTo<T>() where T : State
 		{
 			if (_client == null)
 				throw new InvalidOperationException("The client being passed to Scenes from SceneManager cannot be null.");
@@ -55,6 +59,7 @@ namespace SS31.Client
 			return cached;
 		}
 
+		// These next three are to manage cached states. Currently cached states can be explicitly deleted.
 		public bool HasCachedType<T>() where T : State
 		{
 			return _cachedScenes.ContainsKey(typeof(T));
@@ -79,6 +84,8 @@ namespace SS31.Client
 			return null;
 		}
 
+		// These two methods are called from Client and will update and draw the active state.
+		// If a state change is queued, then it will happen after the active state is done drawing.
 		public void Update(GameTime gameTime)
 		{
 			if (ActiveScene != null)
@@ -107,6 +114,7 @@ namespace SS31.Client
 				doSwitch();
 		}
 
+		// Do all of the switching stuff.
 		private void doSwitch()
 		{
 			if (!_changeQueued || _typeQueued == null)

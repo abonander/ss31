@@ -2,6 +2,7 @@
 
 namespace SS31.Common.Network
 {
+	// More concrete way to hold ip addresses. Redundant and will probably be removed soon.
 	public struct IPEntry
 	{
 		public byte N1;

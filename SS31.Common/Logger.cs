@@ -18,6 +18,8 @@ namespace SS31.Common
 	// Passes the log level of the message, the time stamp in the format "[H:mm:ss]", and the message itself.
 	public delegate void MessageLoggedHandler(LogLevel lvl, string ts, string mes);
 
+	// Can be accessed statically from anywhere in the program. It will prepend the message with a timestamp,
+	// and a severity tag, and log it to the console, and a file for use later.
 	public class Logger : GameService
 	{
 		private static readonly string[] s_levelText = new string[]

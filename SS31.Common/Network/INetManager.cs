@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework;
 
 namespace SS31.Common.Network
 {
+	// Interface for the manager that updates and polls for network messages.
+	// Also keeps the information for the current connection.
+	// This looks like it moght only be used for client, which means we will probably get rid of it in the future.
 	public interface INetManager
 	{
 		NetPeerStatistics Stats { get; }

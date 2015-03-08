@@ -8,6 +8,7 @@ using SS31.Common.Service;
 namespace SS31.Client
 {
 	// Higher level input class, provides support for both polling and event based input
+	// Methods here are pretty self explanitory
 	public class InputManager : GameService
 	{
 		#region Members
