@@ -94,6 +94,7 @@ namespace SS31.Common
 			lock (mutex)
 			{
 				logStream.Write(log + "\n");
+				logStream.Flush();
 			}
 		}
 
@@ -115,6 +116,7 @@ namespace SS31.Common
 			lock (mutex)
 			{
 				logStream.Write(log + "\n");
+				logStream.Flush();
 			}
 		}
 
