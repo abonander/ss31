@@ -59,7 +59,8 @@
     <Compile Include="..\..\SS31.Common\Network\NetEnums.cs" />
     <Compile Include="..\..\SS31.Common\Utility\Exception.cs" />
     <Compile Include="..\..\SS31.Common\Config\IConfiguration.cs" />
-    <Compile Include="..\..\SS31.Common\Config\ConfigSerializer.cs" />
+    <Compile Include="..\..\SS31.Common\Config\ConfigManager.cs" />
+    <Compile Include="..\..\SS31.Common\Utility\ObjectSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\SS31.Common\packages.config" />
