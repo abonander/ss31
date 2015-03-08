@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 namespace SS31.Common
 {
+	// A specific block in the profiler.
 	public class ProfileBlock
 	{
 		private static int count = 0;
@@ -101,6 +102,10 @@ namespace SS31.Common
 		#endregion
 	}
 
+	// Can be used to profile running time in different sections of the code. Blocks are stored as a tree,
+	// so they take on the attribute of a parent's running information will be a sum of all of it's children's
+	// running information. Care must be taken to make sure that the same block is opened and closed on the same level,
+	// or the tree structure will start to break down.
 	public class Profiler : GameService
 	{
 		#region Members

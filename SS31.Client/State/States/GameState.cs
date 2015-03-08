@@ -5,6 +5,7 @@ using SS31.Common.Network;
 
 namespace SS31.Client
 {
+	// This is just the test state, until we get a  nice splash screen and main menu and whatnot going.
 	public class GameState : State
 	{
 		public override bool ShouldSuspend { get { return false; } }
@@ -33,7 +34,7 @@ namespace SS31.Client
 		protected override void Initialize()
 		{
 			ServiceManager.Resolve<NetManager>().OnMessageRecieved += handleNetworkMessage;
-			ServiceManager.Resolve<NetManager>().Connect(new IPEntry("127.0.0.1:8100"));
+			// ServiceManager.Resolve<NetManager>().Connect(new IPEntry("127.0.0.1:8100"));
 		}
 
 		public override void Update(GameTime gameTime)

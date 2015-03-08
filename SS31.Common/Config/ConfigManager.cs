@@ -4,6 +4,8 @@ using SS31.Common.Service;
 
 namespace SS31.Common.Config
 {
+	// Base class for the configuration manager in client and server that handles the general settings
+	// for the programs.
 	public abstract class ConfigManager<T> : GameService 
 		where T : class, IConfiguration, new()
 	{
@@ -18,6 +20,7 @@ namespace SS31.Common.Config
 			ConfigSerialType = Configuration.GetSerializeType();
 		}
 
+		// Try to load the configuration file, or revert to defaults and create new file if it doesnt exist
 		public virtual void Initialize(string path)
 		{
 			if (String.IsNullOrEmpty(path))
@@ -43,6 +46,7 @@ namespace SS31.Common.Config
 				Logger.LogError("Could not deserialize settings. Resorting to default.");
 		}
 
+		// Save the current configurations into the settings file
 		public virtual void Save()
 		{
 			if (String.IsNullOrEmpty(ConfigPath))

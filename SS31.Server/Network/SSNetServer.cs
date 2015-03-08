@@ -6,6 +6,8 @@ using SS31.Common.Service;
 
 namespace SS31.Server
 {
+	// Represents the lower level server object. This interfaces directly with Lidgren with sending messages.
+	// This should not be messed with too much.
 	public class SSNetServer : NetServer, IGameService
 	{
 		private bool _disposed;

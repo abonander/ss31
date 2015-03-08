@@ -10,6 +10,8 @@ using SS31.Server.Config;
 
 namespace SS31.Server
 {
+	// Base class for the server application. Contains all of the general server information,
+	// as well as the update loop.
 	public class SSServer
 	{
 		public bool Initialized { get; private set; } // If this server has been initialized
@@ -42,6 +44,7 @@ namespace SS31.Server
 			_lastRecvBytes = 0;
 		}
 
+		// Initialization stuff here...
 		public bool Initialize()
 		{
 			if (Initialized)
@@ -78,6 +81,8 @@ namespace SS31.Server
 			GC.Collect();
 		}
 
+		// Start the server and launch into the main loop.
+		// Main loop needs to be changed as it gums up the server right now.
 		public void Run()
 		{
 			_timer.Restart();
@@ -90,6 +95,7 @@ namespace SS31.Server
 				mainLoop();
 		}
 
+		// The actual main loop stuff.
 		private void mainLoop()
 		{
 			TimeSpan total = _timer.Elapsed;

@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace SS31.Common.Service
 {
+	// Base class for Service managers in Client and Server. Anything that has the IGameService interface can
+	// be registered as a server. There can only be one instance of each service type, which acts like a singleton,
+	// but it is stored and managed by this class, which makes it safer overall to use.
 	public static class ServiceManager
 	{
 		private readonly static Dictionary<Type, IGameService> registeredServices;
@@ -19,7 +22,8 @@ namespace SS31.Common.Service
 			registeredServices.Remove(type);
 			s.Dispose();
 		}
-			
+
+		// Called at the end of the program.
 		public static void UnregisterAll()
 		{
 			Type loggerType = typeof(Logger);
@@ -37,11 +41,13 @@ namespace SS31.Common.Service
 			registeredServices.Clear();
 		}
 
+		// Check if a service has been registered.
 		public static bool HasService<T>() where T : IGameService
 		{
 			return registeredServices.ContainsKey(typeof(T));
 		}
 			
+		// Returns the service of type T, if it exists, or creates it if it doesnt.
 		public static T Resolve<T>() where T : IGameService
 		{
 			Type t = typeof(T);
