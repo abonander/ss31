@@ -23,7 +23,7 @@ namespace SS31.Common
 	public sealed class InvalidConstructorParameterException : Exception
 	{
 		public InvalidConstructorParameterException(string message) :
-			base(message)
+		base(message)
 		{
 
 		}

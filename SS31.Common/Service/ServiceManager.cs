@@ -32,6 +32,7 @@ namespace SS31.Common.Service
 				s.Dispose();
 			}
 			Logger logger = (Logger)registeredServices[loggerType];
+			logger.Close();
 			logger.Dispose();
 			registeredServices.Clear();
 		}

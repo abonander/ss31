@@ -6,6 +6,7 @@ using Lidgren.Network;
 using SS31.Common;
 using SS31.Common.Service;
 using SS31.Common.Network;
+using SS31.Server.Config;
 
 namespace SS31.Server
 {
@@ -15,6 +16,7 @@ namespace SS31.Server
 		public bool Running { get; private set; } // If the server is running in its main loop
 		public uint TickRate { get; private set; } // The number of times the server should update every second
 		public float ServerRate { get { return 1000.0f / TickRate; } } // The time each update should take (in milliseconds)
+		public string ServerName { get; private set; }
 
 		public Dictionary<NetConnection, Client> ClientList;
 
@@ -46,7 +48,10 @@ namespace SS31.Server
 				return true;
 
 			// TODO: Initialization stuff
-			TickRate = 20; // TODO: This is temporary, we should eventually load it from a config manager.
+			ServiceManager.Resolve<ServerConfigManager>().Initialize("server.cfg");
+			var config = ServiceManager.Resolve<ServerConfigManager>().Configuration;
+			ServerName = config.ServerName;
+			TickRate = config.ServerTickRate;
 
 			Initialized = true;
 			return true;
@@ -114,8 +119,8 @@ namespace SS31.Server
 				_lastSentBytes = stats.SentBytes;
 				_lastRecvBytes = stats.ReceivedBytes;
 
-				Console.Title = string.Format("SS31 Server - TPS: {0:N2} | Net: (S: {1:N0} KiB/s, R: {2:N0} KiB/s) | Mem: {3:N0} KiB", 
-					1.0f / gameTime.ElapsedGameTime.TotalSeconds, (dSent >> 10) / 2, (dRecv >> 10) / 2,
+				Console.Title = string.Format("{0} - TPS: {1:N2}({2:N2}) | Net: (S: {3:N0} KiB/s, R: {4:N0} KiB/s) | Mem: {5:N0} KiB", 
+					ServerName, 1.0f / gameTime.ElapsedGameTime.TotalSeconds, TickRate, (dSent >> 10) / 2, (dRecv >> 10) / 2,
 					Process.GetCurrentProcess().PrivateMemorySize64 >> 10);
 				_lastTitleUpdate = gameTime.TotalGameTime;
 			}
