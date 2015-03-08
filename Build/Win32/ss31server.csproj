@@ -45,6 +45,8 @@
     <Compile Include="..\..\SS31.Server\Server.cs" />
     <Compile Include="..\..\SS31.Server\Network\SSNetServer.cs" />
     <Compile Include="..\..\SS31.Server\Network\Client.cs" />
+    <Compile Include="..\..\SS31.Server\Config\ServerConfiguration.cs" />
+    <Compile Include="..\..\SS31.Server\Config\ServerConfigManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ss31common.csproj">
@@ -54,5 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\SS31.Server\packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="..\..\SS31.Server\Config\" />
   </ItemGroup>
 </Project>

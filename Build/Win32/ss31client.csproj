@@ -50,6 +50,8 @@
     <Compile Include="..\..\SS31.Client\State\State.cs" />
     <Compile Include="..\..\SS31.Client\State\StateManager.cs" />
     <Compile Include="..\..\SS31.Client\State\States\GameState.cs" />
+    <Compile Include="..\..\SS31.Client\Config\ClientConfirguration.cs" />
+    <Compile Include="..\..\SS31.Client\Config\ClientConfigManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ss31common.csproj">
@@ -65,5 +67,6 @@
     <Folder Include="..\..\SS31.Client\Network\" />
     <Folder Include="..\..\SS31.Client\State\" />
     <Folder Include="..\..\SS31.Client\State\States\" />
+    <Folder Include="..\..\SS31.Client\Config\" />
   </ItemGroup>
 </Project>

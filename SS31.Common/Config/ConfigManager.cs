@@ -5,7 +5,7 @@ using SS31.Common.Service;
 namespace SS31.Common.Config
 {
 	public abstract class ConfigManager<T> : GameService 
-		where T : struct, IConfiguration
+		where T : class, IConfiguration, new()
 	{
 		public string ConfigPath { get; protected set; }
 		public T Configuration { get; protected set; }
@@ -14,8 +14,8 @@ namespace SS31.Common.Config
 		protected ConfigManager()
 		{
 			ConfigPath = "";
-			Configuration = default(T);
-			ConfigSerialType = Configuration.SerializeType;
+			Configuration = new T();
+			ConfigSerialType = Configuration.GetSerializeType();
 		}
 
 		public virtual void Initialize(string path)
@@ -31,12 +31,12 @@ namespace SS31.Common.Config
 			if (!File.Exists(path))
 			{
 				Logger.LogError("The config file " + path + " could not be found. Resorting to default settings and creating a new file.");
-				Configuration = default(T);
+				Configuration = new T();
 				ObjectSerializer.SerializeToFile<T>(Configuration, ConfigPath, ConfigSerialType, out success);
 			}
 			else
 			{
-				Configuration = ObjectSerializer.DeserializeFile<T>(ConfigPath, ConfigSerialType, out success);
+				Configuration = ObjectSerializer.DeserializeFile<T>(ConfigPath, ConfigSerialType, out success, new T());
 			}
 
 			if (!success)
