@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ss31client", "ss31client.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ss31server", "ss31server.csproj", "{2513CF6C-220D-49A7-B4BC-0FBA6E56C0BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ss31ui", "ss31ui.csproj", "{6499D561-FF69-42A8-8AE4-1CEC2D348514}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{2513CF6C-220D-49A7-B4BC-0FBA6E56C0BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2513CF6C-220D-49A7-B4BC-0FBA6E56C0BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2513CF6C-220D-49A7-B4BC-0FBA6E56C0BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6499D561-FF69-42A8-8AE4-1CEC2D348514}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6499D561-FF69-42A8-8AE4-1CEC2D348514}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6499D561-FF69-42A8-8AE4-1CEC2D348514}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6499D561-FF69-42A8-8AE4-1CEC2D348514}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AC7A5C09-8C67-494B-B048-EAEAC5CD0E96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AC7A5C09-8C67-494B-B048-EAEAC5CD0E96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC7A5C09-8C67-494B-B048-EAEAC5CD0E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
