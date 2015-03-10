@@ -51,10 +51,12 @@
   <ItemGroup>
     <Folder Include="..\..\SS31.Client.UI\Properties\" />
     <Folder Include="..\..\SS31.Client.UI\Render\" />
+    <Folder Include="..\..\SS31.Client.UI\Widget\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\SS31.Client.UI\Properties\AssemblyInfo.cs" />
     <Compile Include="..\..\SS31.Client.UI\UIManager.cs" />
     <Compile Include="..\..\SS31.Client.UI\Render\RenderManager.cs" />
+    <Compile Include="..\..\SS31.Client.UI\Widget\Widget.cs" />
   </ItemGroup>
 </Project>

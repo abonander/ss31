@@ -33,7 +33,10 @@ namespace SS31.Client.UI
 		#region Dispose
 		public override void Dispose(bool disposing)
 		{
-			// TODO: Dispose things, I suppose
+			if (!Disposed && disposing)
+			{
+				RenderManager.Dispose();
+			}
 
 			base.Dispose(disposing);
 		}

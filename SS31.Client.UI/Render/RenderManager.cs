@@ -8,7 +8,7 @@ namespace SS31.Client.UI
 		#region Members
 		private bool _disposed;
 
-		private RasterizerState _scissorState; // State for activating the scissor test
+		private readonly RasterizerState _scissorState; // State for activating the scissor test
 
 		internal GraphicsDevice GraphicsDevice { get; private set; } // The graphics device for the application
 		internal SpriteBatch SpriteBatch { get; private set; } // The spritebatch used specifically by this library
