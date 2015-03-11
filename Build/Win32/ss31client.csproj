@@ -43,8 +43,6 @@
     <Compile Include="..\..\SS31.Client\Properties\AssemblyInfo.cs" />
     <Compile Include="..\..\SS31.Client\Program.cs" />
     <Compile Include="..\..\SS31.Client\Client.cs" />
-    <Compile Include="..\..\SS31.Client\Input\Mouse.cs" />
-    <Compile Include="..\..\SS31.Client\Input\Event.cs" />
     <Compile Include="..\..\SS31.Client\Input\InputManager.cs" />
     <Compile Include="..\..\SS31.Client\Network\NetManager.cs" />
     <Compile Include="..\..\SS31.Client\State\State.cs" />
