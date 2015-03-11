@@ -61,5 +61,6 @@
     <Compile Include="..\..\SS31.Client.UI\UIManager.cs" />
     <Compile Include="..\..\SS31.Client.UI\Render\RenderManager.cs" />
     <Compile Include="..\..\SS31.Client.UI\Widget\Widget.cs" />
+    <Compile Include="..\..\SS31.Client.UI\InputManager.cs" />
   </ItemGroup>
 </Project>

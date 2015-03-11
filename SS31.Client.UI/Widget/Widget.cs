@@ -1,17 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using SS31.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace SS31.Client.UI
 {
-	public abstract class Widget
+	public abstract class Widget : IDisposable
 	{
 		private static uint count;
 		private static readonly Dictionary<string, uint> nameCounts;
 
 		#region Members
-		public Widget Parent { get; set; } // Parent widget to this one
+		private bool _disposed;
+		public bool Disposed { get { return _disposed; } }
+
+		public Widget Parent { get; internal set; } // Parent widget to this one
 		public List<Widget> Children { get; private set; } // The children widgets to this one
 
 		public readonly string Identifier; // String that identitifies this widget uniquely
@@ -159,6 +165,12 @@ namespace SS31.Client.UI
 
 			// Default values
 			MaskChildren = true;
+
+			_disposed = false;
+		}
+		~Widget()
+		{
+			Dispose(false);
 		}
 
 		// Update this all children widgets
@@ -167,9 +179,56 @@ namespace SS31.Client.UI
 		public abstract void Draw(SpriteBatch batch);
 
 		// Called when any changes are made that would affect layout
-		protected abstract void onResize(); // TODO: This may need to be virtual and call onResize() for children, don't know yet...
+		protected virtual void onResize() { } // TODO: This may need to call onResize() for children, don't know yet...
+
+		#region Input Management
+		#endregion
 
 		#region Children Management
+		public virtual void AddChild(Widget widget)
+		{
+			if (widget.Parent == this)
+				return;
+			if (widget.Parent != null)
+				throw new InvalidOperationException("Cannot add a widget as a child if it is already a child of another widget.");
+
+			widget.Parent = this;
+			Children.Add(widget);
+		}
+
+		public virtual void RemoveChild(Widget widget)
+		{
+			if (widget.Parent != this)
+				return;
+
+			widget.Parent = null;
+			Children.Remove(widget);
+			widget.Dispose();
+		}
+		public virtual void RemoveChild(string ident)
+		{
+			Widget w = (from wid in Children
+						where wid.Identifier == ident
+			            select wid).FirstOrDefault();
+			if (w == null)
+				return;
+
+			w.Parent = null;
+			Children.Remove(w);
+			w.Dispose();
+		}
+		#endregion
+
+		#region Disposal
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+		public virtual void Dispose(bool disposing)
+		{
+			_disposed = true;
+		}
 		#endregion
 
 		#region Static Functions
