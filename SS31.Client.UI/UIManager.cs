@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SS31.Common;
 using SS31.Common.Service;
 using Microsoft.Xna.Framework;
@@ -10,6 +11,8 @@ namespace SS31.Client.UI
 	{
 		#region Members
 		internal RenderManager RenderManager { get; private set; }
+
+		internal List<Widget> ManagedWidgets { get; private set; } // A list of the base widgets, as the starting point for the update and draw calls
 		#endregion
 
 		public UIManager(GraphicsDevice device)
@@ -22,9 +25,16 @@ namespace SS31.Client.UI
 
 		public void Update(GameTime gameTime)
 		{
-
+			
 		}
 
+		// Call this before clearing the main screen
+		public void Predraw()
+		{
+			RenderManager.PreDraw(ManagedWidgets);
+		}
+
+		// Call this after everything else in the frame is done drawing
 		public void Draw()
 		{
 			RenderManager.Draw();

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SS31.Client.UI
 {
 	public abstract class Widget
 	{
-		private static uint _count;
-		private static readonly Dictionary<string, uint> _nameCounts;
+		private static uint count;
+		private static readonly Dictionary<string, uint> nameCounts;
 
 		#region Members
 		public Widget Parent { get; set; } // Parent widget to this one
@@ -128,6 +129,9 @@ namespace SS31.Client.UI
 					onResize();
 			}
 		}
+
+		// If this widget should use the stencil buffer to mask its children
+		public bool MaskChildren { get; set; }
 		#endregion
 		#endregion
 
@@ -137,19 +141,30 @@ namespace SS31.Client.UI
 
 			if (!String.IsNullOrEmpty(ident))
 			{
-				if (!_nameCounts.ContainsKey(ident))
+				if (!nameCounts.ContainsKey(ident))
+				{
 					Identifier = ident;
+					nameCounts[ident] = 1;
+				}
 				else
 				{
-					_nameCounts[ident]++;
-					Identifier = ident + _nameCounts[ident];
+					nameCounts[ident]++;
+					Identifier = ident + nameCounts[ident];
 				}
 			}
 			else
-				Identifier = "Widget" + _count;
+				Identifier = "Widget" + count;
 
-			++_count;
+			++count;
+
+			// Default values
+			MaskChildren = true;
 		}
+
+		// Update this all children widgets
+		public abstract void Update(GameTime gameTime);
+		// Draw this and all children widgets
+		public abstract void Draw(SpriteBatch batch);
 
 		// Called when any changes are made that would affect layout
 		protected abstract void onResize(); // TODO: This may need to be virtual and call onResize() for children, don't know yet...
@@ -160,8 +175,8 @@ namespace SS31.Client.UI
 		#region Static Functions
 		static Widget()
 		{
-			_count = 0;
-			_nameCounts = new Dictionary<string, uint>();
+			count = 0;
+			nameCounts = new Dictionary<string, uint>();
 		}
 		#endregion
 	}
