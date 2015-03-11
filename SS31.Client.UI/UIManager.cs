@@ -26,13 +26,15 @@ namespace SS31.Client.UI
 		public void Initialize(GraphicsDevice device, IInputManager input)
 		{
 			RenderManager = new RenderManager(device);
-			InputManager = input;
+			InputManager = new InputManager(input);
 		}
 
 		public void Update(GameTime gameTime)
 		{
 			if (!IsInitialized)
 				return;
+
+			InputManager.Update(gameTime);
 
 			foreach (Widget w in ManagedWidgets)
 				w.Update(gameTime);

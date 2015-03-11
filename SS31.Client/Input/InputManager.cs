@@ -65,6 +65,16 @@ namespace SS31.Client
 
 			MouseButton[] pressedButtons = GetPressedButtons();
 
+			if (CurrentMouseState.Position != PreviousMouseState.Position)
+				mouseMovedEvent();
+
+			MouseButton drag = MouseButton.None;
+			if ((drag = GetDraggingMouseButtons()) != MouseButton.None)
+				mouseDraggedEvent(drag);
+
+			if (CurrentMouseState.ScrollWheelValue != PreviousMouseState.ScrollWheelValue)
+				scrollEvent();
+
 			foreach (Keys key in Enum.GetValues(typeof(Keys)))
 			{
 				if (IsKeyDown(key))
@@ -127,16 +137,6 @@ namespace SS31.Client
 					}
 				}
 			}
-
-			if (CurrentMouseState.Position != PreviousMouseState.Position)
-				mouseMovedEvent();
-
-			MouseButton drag = MouseButton.None;
-			if ((drag = GetDraggingMouseButtons()) != MouseButton.None)
-				mouseDraggedEvent(drag);
-
-			if (CurrentMouseState.ScrollWheelValue != PreviousMouseState.ScrollWheelValue)
-				scrollEvent();
 
 			_profiler.EndBlock();
 		}

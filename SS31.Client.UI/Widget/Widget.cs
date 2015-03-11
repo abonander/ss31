@@ -182,6 +182,11 @@ namespace SS31.Client.UI
 		protected virtual void onResize() { } // TODO: This may need to call onResize() for children, don't know yet...
 
 		#region Input Management
+		// See the InputManager for descriptions of these states
+		public virtual void OnFocusGained() { } // When the widget loses focus
+		public virtual void OnFocusLost() { } // When a widget gains focus
+		public virtual void OnHoverEnter() { } // When the mouse starts to hover over the widget
+		public virtual void OnHoverExit() { } // When the mouse stops hovering over the widget
 		#endregion
 
 		#region Children Management
