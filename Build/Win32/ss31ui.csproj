@@ -59,5 +59,6 @@
     <Compile Include="..\..\SS31.Client.UI\Render\RenderManager.cs" />
     <Compile Include="..\..\SS31.Client.UI\Widget\Widget.cs" />
     <Compile Include="..\..\SS31.Client.UI\InputManager.cs" />
+    <Compile Include="..\..\SS31.Client.UI\Event.cs" />
   </ItemGroup>
 </Project>
