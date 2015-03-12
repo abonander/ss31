@@ -26,7 +26,7 @@ namespace SS31.Client.UI
 		public void Initialize(GraphicsDevice device, IInputManager input)
 		{
 			RenderManager = new RenderManager(device);
-			InputManager = new InputManager(input);
+			InputManager = new InputManager(ManagedWidgets, input);
 		}
 
 		public void Update(GameTime gameTime)

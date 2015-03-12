@@ -22,6 +22,9 @@ namespace SS31.Client.UI
 
 		public readonly string Identifier; // String that identitifies this widget uniquely
 
+		public bool IsHoveredWidget { get { return InputManager.Instance.HoveredWidget == this; } }
+		public bool IsFocusedWidget { get { return InputManager.Instance.FocusedWidget == this; } }
+
 		#region Properties
 		// The inner area of the widget, accounting for the outer area and the padding, and the stecil rectangle for the children components
 		protected Rectangle _innerArea;
@@ -54,6 +57,9 @@ namespace SS31.Client.UI
 		{
 			get { Point abs = AbsolutePosition; return new Rectangle(abs.X, abs.Y, _outerArea.Width, _outerArea.Height); }
 		}
+
+		// This will eventually, hopefully, allow custom input areas
+		public virtual Rectangle AbsoluteInputArea { get { return AbsoluteOuterArea; } }
 
 		// The position of the widget (relative to the parent position)
 		public virtual Point Position
@@ -187,6 +193,22 @@ namespace SS31.Client.UI
 		public virtual void OnFocusLost() { } // When a widget gains focus
 		public virtual void OnHoverEnter() { } // When the mouse starts to hover over the widget
 		public virtual void OnHoverExit() { } // When the mouse stops hovering over the widget
+
+		// The events below can only be triggered if this is the FocusedWidget in the InputManager
+		public virtual void OnMousePress(MouseButton button, MouseState current, MouseState last) { } // Called when a mouse button is pressed
+		public virtual void OnMouseRelease(MouseButton button, MouseState current, MouseState last) { } // Called when a mouse button is released
+		public virtual void OnMouseClick(MouseButton button, MouseState current, MouseState last) { } // Called when a mouse button is clicked
+		public virtual void OnMouseDoubleClick(MouseButton button, MouseState current, MouseState last) { } // Called when a mouse button is double clicked
+
+		// The move and drag functions will only be called if the mouse starting and ending point were both within the widget
+		public virtual void OnMouseMove(Point position, MouseState current, MouseState last) { } // Called if the mouse moves within the widget
+		public virtual void OnMouseDrag(MouseButton buttons, Point position, MouseState current, MouseState last) { } // Called if the mouse is dragged within the widget
+		public virtual void OnMouseScroll(int value, MouseState current, MouseState last) { } // Called if the mouse is scrolled within the widget
+
+		public virtual void OnKeyDown(Keys key, KeyboardState current, KeyboardState last) { } // Called when a key is pressed
+		public virtual void OnKeyUp(Keys key, KeyboardState current, KeyboardState last) { } // Called when a key is released
+		public virtual void OnKeyHeld(Keys key, KeyboardState current, KeyboardState last) { } // Called when a key is held down for an amount of time
+		public virtual void OnCharacterTyped(Keys key, bool shift, bool control, bool alt) { } // Contains specific data for character typing, convinient for text entry
 		#endregion
 
 		#region Children Management
