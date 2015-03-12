@@ -38,7 +38,7 @@ namespace SS31.Client.UI
 					_focusedWidget.onFocusGained();
 					Widget root = _focusedWidget;
 					while (root.Parent != null) // Get the new root for the focused widget
-						root = _focusedParent = root.Parent; // WARNING: CIRCULAR OWNERSHIP WILL MAKE THE INFINITE LOOPS, IS BAD, YES?
+						root = _focusedParent = (Widget)root.Parent; // WARNING: CIRCULAR OWNERSHIP WILL MAKE THE INFINITE LOOPS, IS BAD, YES?
 				}
 			}
 		}
@@ -177,22 +177,25 @@ namespace SS31.Client.UI
 		{
 			if (!root.AbsoluteInputArea.Contains(_mousePosition))
 				return null;
+			else if (!(root is IWidgetContainer))
+				return root;
 
+			IWidgetContainer ctnr = (IWidgetContainer)root;
 			Widget ret = null;
-			if (root.Children.Count < 1)
+			if (ctnr.Children.Count < 1)
 				return root;
 			else
 			{
-				foreach (Widget w in root.Children)
+				foreach (Widget w in ctnr.Children)
 				{
 					ret = findHoverWidget(w);
 					if (ret != null)
 						return ret;
 				}
-
+			
 				return root; // This is for a weird case where root has children, but they are all outside of the parent's input area
 			}
-		}
+	}
 
 		public void Update(GameTime gameTime)
 		{

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using SS31.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace SS31.Client.UI
 {
-	public abstract class Widget : IDisposable
+	public abstract class Widget : IWidget
 	{
 		private static uint count;
 		private static readonly Dictionary<string, uint> nameCounts;
@@ -17,8 +16,7 @@ namespace SS31.Client.UI
 		private bool _disposed;
 		public bool Disposed { get { return _disposed; } }
 
-		public Widget Parent { get; internal set; } // Parent widget to this one
-		public List<Widget> Children { get; private set; } // The children widgets to this one
+		public IWidgetContainer Parent { get; internal set; } // Parent widget to this one
 
 		public readonly string Identifier; // String that identitifies this widget uniquely
 
@@ -141,9 +139,6 @@ namespace SS31.Client.UI
 					onResize();
 			}
 		}
-
-		// If this widget should use the stencil buffer to mask its children
-		public bool MaskChildren { get; set; }
 		#endregion
 
 		#region Events
@@ -172,8 +167,6 @@ namespace SS31.Client.UI
 
 		protected Widget(string ident = null)
 		{
-			Children = new List<Widget>();
-
 			if (!String.IsNullOrEmpty(ident))
 			{
 				if (!nameCounts.ContainsKey(ident))
@@ -191,9 +184,6 @@ namespace SS31.Client.UI
 				Identifier = "Widget" + count;
 
 			++count;
-
-			// Default values
-			MaskChildren = true;
 
 			_disposed = false;
 		}
@@ -265,41 +255,6 @@ namespace SS31.Client.UI
 			{ if (OnCharacterTyped != null) OnCharacterTyped(this, key, shift, control, alt); } 
 		#endregion
 
-		#region Children Management
-		public virtual void AddChild(Widget widget)
-		{
-			if (widget.Parent == this)
-				return;
-			if (widget.Parent != null)
-				throw new InvalidOperationException("Cannot add a widget as a child if it is already a child of another widget.");
-
-			widget.Parent = this;
-			Children.Add(widget);
-		}
-
-		public virtual void RemoveChild(Widget widget)
-		{
-			if (widget.Parent != this)
-				return;
-
-			widget.Parent = null;
-			Children.Remove(widget);
-			widget.Dispose();
-		}
-		public virtual void RemoveChild(string ident)
-		{
-			Widget w = (from wid in Children
-						where wid.Identifier == ident
-			            select wid).FirstOrDefault();
-			if (w == null)
-				return;
-
-			w.Parent = null;
-			Children.Remove(w);
-			w.Dispose();
-		}
-		#endregion
-
 		#region Disposal
 		public void Dispose()
 		{
@@ -308,14 +263,6 @@ namespace SS31.Client.UI
 		}
 		public virtual void Dispose(bool disposing)
 		{
-			if (!Disposed && disposing)
-			{
-				foreach (Widget w in Children)
-					w.Dispose();
-
-				Children.Clear();
-			}
-
 			_disposed = true;
 		}
 		#endregion
