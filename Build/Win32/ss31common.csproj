@@ -63,6 +63,9 @@
     <Compile Include="..\..\SS31.Common\Config\IConfiguration.cs" />
     <Compile Include="..\..\SS31.Common\Config\ConfigManager.cs" />
     <Compile Include="..\..\SS31.Common\Utility\ObjectSerializer.cs" />
+    <Compile Include="..\..\SS31.Common\Input\Event.cs" />
+    <Compile Include="..\..\SS31.Common\Input\Mouse.cs" />
+    <Compile Include="..\..\SS31.Common\Input\IInputManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\SS31.Common\packages.config" />
@@ -72,5 +75,6 @@
     <Folder Include="..\..\SS31.Common\Service\" />
     <Folder Include="..\..\SS31.Common\Utility\" />
     <Folder Include="..\..\SS31.Common\Config\" />
+    <Folder Include="..\..\SS31.Common\Input\" />
   </ItemGroup>
 </Project>

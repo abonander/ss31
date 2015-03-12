@@ -9,7 +9,7 @@ namespace SS31.Client
 {
 	// Higher level input class, provides support for both polling and event based input
 	// Methods here are pretty self explanitory
-	public class InputManager : GameService
+	public class InputManager : IInputManager
 	{
 		#region Members
 		public KeyboardState PreviousKeyState { get; private set; }
@@ -46,6 +46,8 @@ namespace SS31.Client
 		public event MouseScrollEvent MouseScrolled; // The mouse wheel value is changed
 
 		private Profiler _profiler;
+		private bool _disposed;
+		public bool Disposed { get { return _disposed; } }
 		#endregion
 
 		public void Update(GameTime gameTime)
@@ -62,6 +64,16 @@ namespace SS31.Client
 			CurrentMouseState = Mouse.GetState();
 
 			MouseButton[] pressedButtons = GetPressedButtons();
+
+			if (CurrentMouseState.Position != PreviousMouseState.Position)
+				mouseMovedEvent();
+
+			MouseButton drag = MouseButton.None;
+			if ((drag = GetDraggingMouseButtons()) != MouseButton.None)
+				mouseDraggedEvent(drag);
+
+			if (CurrentMouseState.ScrollWheelValue != PreviousMouseState.ScrollWheelValue)
+				scrollEvent();
 
 			foreach (Keys key in Enum.GetValues(typeof(Keys)))
 			{
@@ -125,16 +137,6 @@ namespace SS31.Client
 					}
 				}
 			}
-
-			if (CurrentMouseState.Position != PreviousMouseState.Position)
-				mouseMovedEvent();
-
-			MouseButton drag = MouseButton.None;
-			if ((drag = GetDraggingMouseButtons()) != MouseButton.None)
-				mouseDraggedEvent(drag);
-
-			if (CurrentMouseState.ScrollWheelValue != PreviousMouseState.ScrollWheelValue)
-				scrollEvent();
 
 			_profiler.EndBlock();
 		}
@@ -394,9 +396,19 @@ namespace SS31.Client
 			}
 
 			_profiler = ServiceManager.Resolve<Profiler>();
+			_disposed = false;
+		}
+		~InputManager()
+		{
+			Dispose(false);
 		}
 
-		public override void Dispose(bool disposing)
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+		public void Dispose(bool disposing)
 		{
 			if (!Disposed && disposing)
 			{
@@ -418,7 +430,7 @@ namespace SS31.Client
 				MouseScrolled = null;
 			}
 
-			base.Dispose(disposing);
+			_disposed = true;
 		}
 		#endregion
 	}
