@@ -5,6 +5,7 @@ using SS31.Common;
 using SS31.Client.Network;
 using SS31.Client.Config;
 using SS31.Common.Service;
+using SS31.Client.UI;
 
 namespace SS31.Client
 {
@@ -19,6 +20,7 @@ namespace SS31.Client
 		private InputManager _inputManager;
 
 		private NetManager _netManager;
+		private UIManager _uiManager;
 
 		// Not much should ever happen here. Put the initialization stuff in initialize.
 		// Methods are called as such: Initialize() -> LoadContent() -> { Update(), Draw() }(repeated) -> OnExiting()
@@ -51,6 +53,7 @@ namespace SS31.Client
 			_inputManager = ServiceManager.Resolve<InputManager>();
 
 			_netManager = ServiceManager.Resolve<NetManager>();
+			(_uiManager = ServiceManager.Resolve<UIManager>()).Initialize(GraphicsDevice, _inputManager);
 
 			// TODO: Switch this out when we get an actual main menu system and whatnot going
 			_stateManager.SwitchTo<GameState>();
@@ -81,6 +84,7 @@ namespace SS31.Client
 
 			_netManager.Update(gameTime);
 			_inputManager.Update(gameTime);
+			_uiManager.Update(gameTime);
 			_stateManager.Update(gameTime);
 
 			base.Update(gameTime);
@@ -90,10 +94,13 @@ namespace SS31.Client
 		// Base draw function, draws the active state, and soon the GUI system
 		protected override void Draw(GameTime gameTime)
 		{
+			_uiManager.Predraw();
+
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 			_profiler.BeginBlock("BaseDraw");
 
 			_stateManager.Draw(gameTime);
+			_uiManager.Draw();
 
 			base.Draw(gameTime);
 			_profiler.EndBlock();

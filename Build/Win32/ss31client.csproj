@@ -56,6 +56,10 @@
       <Project>{AC7A5C09-8C67-494B-B048-EAEAC5CD0E96}</Project>
       <Name>ss31common</Name>
     </ProjectReference>
+    <ProjectReference Include="ss31ui.csproj">
+      <Project>{6499D561-FF69-42A8-8AE4-1CEC2D348514}</Project>
+      <Name>ss31ui</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\SS31.Client\packages.config" />
