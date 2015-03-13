@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using SS31.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,7 +7,27 @@ using Microsoft.Xna.Framework.Input;
 
 namespace SS31.Client.UI
 {
-	public abstract class Widget : IDisposable
+	// Base interface for widgets
+	public interface IWidget : IDisposable
+	{
+		IWidgetContainer Parent { get; }
+
+		bool IsFocusedWidget { get; }
+		bool IsHoveredWidget { get; }
+
+		Rectangle InnerArea { get; }
+		Rectangle OuterArea { get; set; }
+
+		Rectangle AbsoluteInnerArea { get; }
+		Rectangle AbsoluteOuterArea { get; }
+
+		Rectangle AbsoluteInputArea { get; }
+
+		Point Position { get; set; }
+		Point AbsolutePosition{ get; }
+	}
+
+	public abstract class Widget : IWidget
 	{
 		private static uint count;
 		private static readonly Dictionary<string, uint> nameCounts;
@@ -17,8 +36,7 @@ namespace SS31.Client.UI
 		private bool _disposed;
 		public bool Disposed { get { return _disposed; } }
 
-		public Widget Parent { get; internal set; } // Parent widget to this one
-		public List<Widget> Children { get; private set; } // The children widgets to this one
+		public IWidgetContainer Parent { get; internal set; } // Parent widget to this one
 
 		public readonly string Identifier; // String that identitifies this widget uniquely
 
@@ -141,16 +159,34 @@ namespace SS31.Client.UI
 					onResize();
 			}
 		}
+		#endregion
 
-		// If this widget should use the stencil buffer to mask its children
-		public bool MaskChildren { get; set; }
+		#region Events
+		// Public events that can be subscribed to, allows custom code to be run without making custom UI classes.
+		// These will not be fired if child classes do not call base.on[event] for the event.
+		public event UIKeyEvent OnKeyPress;
+		public event UIKeyEvent OnKeyRelease;
+		public event UIKeyEvent OnKeyHeld;
+		public event UICharTypedEvent OnCharacterTyped;
+
+		public event UIMouseButtonEvent OnMousePress;
+		public event UIMouseButtonEvent OnMouseRelease;
+		public event UIMouseButtonEvent OnMouseClick;
+		public event UIMouseButtonEvent OnMouseDoubleClick;
+
+		public event UIMouseMoveEvent OnMouseMove;
+		public event UIMouseDragEvent OnMouseDrag;
+		public event UIMouseScrollEvent OnMouseScroll;
+
+		public event UIWidgetEvent OnFocusGained;
+		public event UIWidgetEvent OnFocusLost;
+		public event UIWidgetEvent OnHoverEnter;
+		public event UIWidgetEvent OnHoverExit;
 		#endregion
 		#endregion
 
 		protected Widget(string ident = null)
 		{
-			Children = new List<Widget>();
-
 			if (!String.IsNullOrEmpty(ident))
 			{
 				if (!nameCounts.ContainsKey(ident))
@@ -169,9 +205,6 @@ namespace SS31.Client.UI
 
 			++count;
 
-			// Default values
-			MaskChildren = true;
-
 			_disposed = false;
 		}
 		~Widget()
@@ -187,63 +220,59 @@ namespace SS31.Client.UI
 		// Called when any changes are made that would affect layout
 		protected virtual void onResize() { } // TODO: This may need to call onResize() for children, don't know yet...
 
+		// TODO: This region is a GIANT UNREADABLE FUCKING MESS OF CODE AND COMMENTS. Clean this up at some point.
 		#region Input Management
-		// See the InputManager for descriptions of these states
-		public virtual void OnFocusGained() { } // When the widget loses focus
-		public virtual void OnFocusLost() { } // When a widget gains focus
-		public virtual void OnHoverEnter() { } // When the mouse starts to hover over the widget
-		public virtual void OnHoverExit() { } // When the mouse stops hovering over the widget
+		// See the InputManager for descriptions of these states, default just calls the events
+		// When the widget loses focus
+		internal virtual void onFocusGained() 
+			{ if (OnFocusGained != null) OnFocusGained(this); }
+		// When a widget gains focus
+		internal virtual void onFocusLost()
+			{ if (OnFocusLost != null) OnFocusLost(this); } 
+		// When the mouse starts to hover over the widget
+		internal virtual void onHoverEnter() 
+			{ if (OnHoverEnter != null) OnHoverEnter(this); }
+		// When the mouse stops hovering over the widget
+		internal virtual void onHoverExit() 
+			{ if (OnHoverExit != null) OnHoverExit(this); } 
 
 		// The events below can only be triggered if this is the FocusedWidget in the InputManager
-		public virtual void OnMousePress(MouseButton button, MouseState current, MouseState last) { } // Called when a mouse button is pressed
-		public virtual void OnMouseRelease(MouseButton button, MouseState current, MouseState last) { } // Called when a mouse button is released
-		public virtual void OnMouseClick(MouseButton button, MouseState current, MouseState last) { } // Called when a mouse button is clicked
-		public virtual void OnMouseDoubleClick(MouseButton button, MouseState current, MouseState last) { } // Called when a mouse button is double clicked
+		// Called when a mouse button is pressed
+		internal virtual void onMousePress(MouseButton button, MouseState current, MouseState last) 
+			{ if (OnMousePress != null) OnMousePress(this, button, current, last); } 
+		// Called when a mouse button is released
+		internal virtual void onMouseRelease(MouseButton button, MouseState current, MouseState last) 
+			{ if (OnMouseRelease != null) OnMouseRelease(this, button, current, last); } 
+		// Called when a mouse button is clicked
+		internal virtual void onMouseClick(MouseButton button, MouseState current, MouseState last) 
+			{ if (OnMouseClick != null) OnMouseClick(this, button, current, last); } 
+		// Called when a mouse button is double clicked
+		internal virtual void onMouseDoubleClick(MouseButton button, MouseState current, MouseState last)
+			{ if (OnMouseDoubleClick != null) OnMouseDoubleClick(this, button, current, last); } 
 
 		// The move and drag functions will only be called if the mouse starting and ending point were both within the widget
-		public virtual void OnMouseMove(Point position, MouseState current, MouseState last) { } // Called if the mouse moves within the widget
-		public virtual void OnMouseDrag(MouseButton buttons, Point position, MouseState current, MouseState last) { } // Called if the mouse is dragged within the widget
-		public virtual void OnMouseScroll(int value, MouseState current, MouseState last) { } // Called if the mouse is scrolled within the widget
+		// Called if the mouse moves within the widget
+		internal virtual void onMouseMove(Point position, MouseState current, MouseState last) 
+			{ if (OnMouseMove != null) OnMouseMove(this, position, current, last); } 
+		// Called if the mouse is dragged within the widget
+		internal virtual void onMouseDrag(MouseButton buttons, Point position, MouseState current, MouseState last) 
+			{ if (OnMouseDrag != null) OnMouseDrag(this, buttons, position, current, last); } 
+		// Called if the mouse is scrolled within the widget
+		internal virtual void onMouseScroll(int value, MouseState current, MouseState last) 
+			{ if (OnMouseScroll != null) OnMouseScroll(this, value, current, last); } 
 
-		public virtual void OnKeyDown(Keys key, KeyboardState current, KeyboardState last) { } // Called when a key is pressed
-		public virtual void OnKeyUp(Keys key, KeyboardState current, KeyboardState last) { } // Called when a key is released
-		public virtual void OnKeyHeld(Keys key, KeyboardState current, KeyboardState last) { } // Called when a key is held down for an amount of time
-		public virtual void OnCharacterTyped(Keys key, bool shift, bool control, bool alt) { } // Contains specific data for character typing, convinient for text entry
-		#endregion
-
-		#region Children Management
-		public virtual void AddChild(Widget widget)
-		{
-			if (widget.Parent == this)
-				return;
-			if (widget.Parent != null)
-				throw new InvalidOperationException("Cannot add a widget as a child if it is already a child of another widget.");
-
-			widget.Parent = this;
-			Children.Add(widget);
-		}
-
-		public virtual void RemoveChild(Widget widget)
-		{
-			if (widget.Parent != this)
-				return;
-
-			widget.Parent = null;
-			Children.Remove(widget);
-			widget.Dispose();
-		}
-		public virtual void RemoveChild(string ident)
-		{
-			Widget w = (from wid in Children
-						where wid.Identifier == ident
-			            select wid).FirstOrDefault();
-			if (w == null)
-				return;
-
-			w.Parent = null;
-			Children.Remove(w);
-			w.Dispose();
-		}
+		// Called when a key is pressed
+		internal virtual void onKeyDown(Keys key, KeyboardState current, KeyboardState last) 
+			{ if (OnKeyPress != null) OnKeyPress(this, key, current, last); } 
+		// Called when a key is released
+		internal virtual void onKeyUp(Keys key, KeyboardState current, KeyboardState last) 
+			{ if (OnKeyRelease != null) OnKeyRelease(this, key, current, last); } 
+		// Called when a key is held down for an amount of time
+		internal virtual void onKeyHeld(Keys key, KeyboardState current, KeyboardState last) 
+			{ if (OnKeyHeld != null) OnKeyHeld(this, key, current, last); }
+		// Contains specific data for character typing, convinient for text entry
+		internal virtual void onCharacterTyped(Keys key, bool shift, bool control, bool alt) 
+			{ if (OnCharacterTyped != null) OnCharacterTyped(this, key, shift, control, alt); } 
 		#endregion
 
 		#region Disposal

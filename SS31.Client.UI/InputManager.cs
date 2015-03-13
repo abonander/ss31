@@ -19,7 +19,7 @@ namespace SS31.Client.UI
 		public KeyboardState CurrentKeyState { get { return BaseInputManager.CurrentKeyState; } }
 		public KeyboardState PreviousKeyState { get { return BaseInputManager.PreviousKeyState; } }
 		public MouseState CurrentMouseState { get { return BaseInputManager.CurrentMouseState; } }
-		public MouseState PrevioudMouseState { get { return BaseInputManager.PreviousMouseState; } }
+		public MouseState PreviousMouseState { get { return BaseInputManager.PreviousMouseState; } }
 
 		// This is the widget that has focus. This is equivalent to the topmost window in the OS, this is the widget that recieves
 		// input events from the BaseInputManager
@@ -31,14 +31,14 @@ namespace SS31.Client.UI
 			{
 				if (value == _focusedWidget) { return; }
 				if (_focusedWidget != null)
-					_focusedWidget.OnFocusLost();
+					_focusedWidget.onFocusLost();
 				_focusedWidget = value;
 				if (_focusedWidget != null)
 				{
-					_focusedWidget.OnFocusGained();
+					_focusedWidget.onFocusGained();
 					Widget root = _focusedWidget;
 					while (root.Parent != null) // Get the new root for the focused widget
-						root = _focusedParent = root.Parent; // WARNING: CIRCULAR OWNERSHIP WILL MAKE THE INFINITE LOOPS, IS BAD, YES?
+						root = _focusedParent = (Widget)root.Parent; // WARNING: CIRCULAR OWNERSHIP WILL MAKE THE INFINITE LOOPS, IS BAD, YES?
 				}
 			}
 		}
@@ -53,10 +53,10 @@ namespace SS31.Client.UI
 			{
 				if (value == _hoveredWidget) { return; }
 				if (_hoveredWidget != null)
-					_hoveredWidget.OnHoverExit();
+					_hoveredWidget.onHoverExit();
 				_hoveredWidget = value;
 				if (_hoveredWidget != null)
-					_hoveredWidget.OnHoverEnter();
+					_hoveredWidget.onHoverEnter();
 			}
 		}
 
@@ -87,7 +87,7 @@ namespace SS31.Client.UI
 					HoveredWidget = findHoverWidget();
 
 					if (FocusedWidget != null)
-						FocusedWidget.OnMouseMove(position, current, last);
+						FocusedWidget.onMouseMove(position, current, last);
 			};
 
 			#region Mouse Input Handlers
@@ -97,32 +97,32 @@ namespace SS31.Client.UI
 						FocusedWidget = HoveredWidget;
 
 					if (FocusedWidget != null)
-						FocusedWidget.OnMousePress(button, current, last);
+						FocusedWidget.onMousePress(button, current, last);
 			};
 			BaseInputManager.MouseButtonReleased += (button, current, last) => 
 			{
 					if (FocusedWidget != null)
-						FocusedWidget.OnMouseRelease(button, current, last);
+						FocusedWidget.onMouseRelease(button, current, last);
 			};
 			BaseInputManager.MouseClicked += (button, current, last) => 
 			{
 					if (FocusedWidget != null)
-						FocusedWidget.OnMouseClick(button, current, last);
+						FocusedWidget.onMouseClick(button, current, last);
 			};
 			BaseInputManager.MouseDoubleClicked += (button, current, last) => 
 			{
 					if (FocusedWidget != null)
-						FocusedWidget.OnMouseDoubleClick(button, current, last);
+						FocusedWidget.onMouseDoubleClick(button, current, last);
 			};
 			BaseInputManager.MouseScrolled += (value, current, last) => 
 			{
 					if (FocusedWidget != null)
-						FocusedWidget.OnMouseScroll(value, current, last);
+						FocusedWidget.onMouseScroll(value, current, last);
 			};
 			BaseInputManager.MouseDragged += (buttons, position, current, last) => 
 			{
 					if (FocusedWidget != null)
-						FocusedWidget.OnMouseDrag(buttons, position, current, last);
+						FocusedWidget.onMouseDrag(buttons, position, current, last);
 			};
 			#endregion
 
@@ -131,8 +131,8 @@ namespace SS31.Client.UI
 			{
 					if (FocusedWidget != null)
 					{
-						FocusedWidget.OnKeyDown(key, current, last);
-						FocusedWidget.OnCharacterTyped(key, 
+						FocusedWidget.onKeyDown(key, current, last);
+						FocusedWidget.onCharacterTyped(key, 
 							current.IsKeyDown(Keys.LeftShift) || current.IsKeyDown(Keys.RightShift),
 							current.IsKeyDown(Keys.LeftControl) || current.IsKeyDown(Keys.RightControl),
 							current.IsKeyDown(Keys.LeftAlt) || current.IsKeyDown(Keys.RightAlt));
@@ -141,12 +141,12 @@ namespace SS31.Client.UI
 			BaseInputManager.KeyReleased += (key, current, last) => 
 			{
 					if (FocusedWidget != null)
-						FocusedWidget.OnKeyDown(key, current, last);
+						FocusedWidget.onKeyDown(key, current, last);
 			};
 			BaseInputManager.KeyHeld += (key, current, last) => 
 			{
 					if (FocusedWidget != null)
-						FocusedWidget.OnKeyHeld(key, current, last);
+						FocusedWidget.onKeyHeld(key, current, last);
 			};
 			#endregion
 		}
@@ -177,22 +177,25 @@ namespace SS31.Client.UI
 		{
 			if (!root.AbsoluteInputArea.Contains(_mousePosition))
 				return null;
+			else if (!(root is IWidgetContainer))
+				return root;
 
+			IWidgetContainer ctnr = (IWidgetContainer)root;
 			Widget ret = null;
-			if (root.Children.Count < 1)
+			if (ctnr.Children.Count < 1)
 				return root;
 			else
 			{
-				foreach (Widget w in root.Children)
+				foreach (Widget w in ctnr.Children)
 				{
 					ret = findHoverWidget(w);
 					if (ret != null)
 						return ret;
 				}
-
+			
 				return root; // This is for a weird case where root has children, but they are all outside of the parent's input area
 			}
-		}
+	}
 
 		public void Update(GameTime gameTime)
 		{

@@ -8,6 +8,8 @@ namespace SS31.Client.UI
 {
 	public class RenderManager : IDisposable
 	{
+		internal static RenderManager Instance { get; private set; }
+
 		#region Members
 		private bool _disposed;
 
@@ -24,6 +26,11 @@ namespace SS31.Client.UI
 
 		public RenderManager(GraphicsDevice device)
 		{
+			if (Instance != null)
+				throw new InvalidOperationException("Cannot have more than one instance of RenderManager.");
+
+			Instance = this;
+
 			if (device == null)
 				throw new ArgumentNullException("device");
 
