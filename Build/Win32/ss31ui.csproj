@@ -31,13 +31,13 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="MonoGame.Framework">
-      <HintPath>packages\MonoGame.Binaries.3.2.0\build\net40\MonoGame.Framework.dll</HintPath>
+      <HintPath>packages\MonoGame.Binaries.3.2.3-alpha\build\net40\AnyCPU\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Lidgren.Network">
-      <HintPath>packages\MonoGame.Binaries.3.2.0\build\net40\Lidgren.Network.dll</HintPath>
+      <HintPath>packages\MonoGame.Binaries.Net.3.2.3-alpha\build\net40\AnyCPU\Lidgren.Network.dll</HintPath>
     </Reference>
     <Reference Include="OpenTK">
-      <HintPath>packages\MonoGame.Binaries.3.2.0\build\net40\OpenTK.dll</HintPath>
+      <HintPath>packages\MonoGame.Binaries.3.2.3-alpha\build\net40\OpenTK.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -47,9 +47,6 @@
       <Project>{AC7A5C09-8C67-494B-B048-EAEAC5CD0E96}</Project>
       <Name>ss31common</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\SS31.Client.UI\packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="..\..\SS31.Client.UI\Properties\" />
