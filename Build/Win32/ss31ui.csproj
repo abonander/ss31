@@ -52,6 +52,7 @@
     <Folder Include="..\..\SS31.Client.UI\Properties\" />
     <Folder Include="..\..\SS31.Client.UI\Render\" />
     <Folder Include="..\..\SS31.Client.UI\Widget\" />
+    <Folder Include="..\..\SS31.Client.UI\Layout\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\SS31.Client.UI\Properties\AssemblyInfo.cs" />
@@ -60,8 +61,7 @@
     <Compile Include="..\..\SS31.Client.UI\Widget\Widget.cs" />
     <Compile Include="..\..\SS31.Client.UI\InputManager.cs" />
     <Compile Include="..\..\SS31.Client.UI\Event.cs" />
-    <Compile Include="..\..\SS31.Client.UI\Widget\IWidgetContainer.cs" />
     <Compile Include="..\..\SS31.Client.UI\Widget\WidgetContainer.cs" />
-    <Compile Include="..\..\SS31.Client.UI\Widget\IWidget.cs" />
+    <Compile Include="..\..\SS31.Client.UI\Layout\Layout.cs" />
   </ItemGroup>
 </Project>
