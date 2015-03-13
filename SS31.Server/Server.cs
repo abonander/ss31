@@ -182,7 +182,7 @@ namespace SS31.Server
 		private void handleStatusChange(NetIncomingMessage msg)
 		{
 			NetConnection conn = msg.SenderConnection;
-			string sip = conn.RemoteEndpoint.Address.ToString();
+			string sip = conn.RemoteEndPoint.Address.ToString();
 			Logger.LogInfo(sip + ": STATUS CHANGE");
 
 			switch (conn.Status)
