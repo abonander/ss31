@@ -54,5 +54,14 @@ namespace SS31.Client.UI
 
 			return ret;
 		}
+
+		// Quick utility method for aligning text
+		public static Point AlignText(this Text text, Rectangle area, VerticalAlignment valign, HorizontalAlignment halign)
+		{
+			if (text == null)
+				throw new ArgumentNullException("text");
+
+			return text.CachedRect.AlignRectangle(area, valign, halign);
+		}
 	}
 }

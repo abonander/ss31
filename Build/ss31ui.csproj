@@ -63,5 +63,7 @@
     <Compile Include="..\SS31.Client.UI\Event.cs" />
     <Compile Include="..\SS31.Client.UI\Widget\WidgetContainer.cs" />
     <Compile Include="..\SS31.Client.UI\Layout\Layout.cs" />
+	<Compile Include="..\SS31.Client.UI\Widget\Simple\Image.cs" />
+    <Compile Include="..\SS31.Client.UI\Widget\Text.cs" />
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@ using SS31.Common;
 using SS31.Common.Service;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 
 namespace SS31.Client.UI
 {
@@ -23,9 +24,9 @@ namespace SS31.Client.UI
 			ManagedWidgets = new List<Widget>();
 		}
 
-		public void Initialize(GraphicsDevice device, IInputManager input)
+		public void Initialize(GraphicsDevice device, IInputManager input, ContentManager content)
 		{
-			RenderManager = new RenderManager(device);
+			RenderManager = new RenderManager(device, content);
 			InputManager = new InputManager(ManagedWidgets, input);
 		}
 
