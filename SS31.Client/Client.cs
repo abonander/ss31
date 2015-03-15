@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SS31.Common;
 using SS31.Client.Network;
-using SS31.Client.Config;
 using SS31.Common.Service;
 using SS31.Client.UI;
 
@@ -43,10 +42,10 @@ namespace SS31.Client
 			_profiler.BeginBlock("Initialization");
 			Logger.LogInfo("Initializing the game.");
 
-			ServiceManager.Resolve<ClientConfigManager>().Initialize("client.cfg");
-			var config = ServiceManager.Resolve<ClientConfigManager>().Configuration;
-			Graphics.PreferredBackBufferWidth = config.ScreenWidth;
-			Graphics.PreferredBackBufferHeight = config.ScreenHeight;
+			//ServiceManager.Resolve<ClientConfigManager>().Initialize("client.cfg");
+			//var config = ServiceManager.Resolve<ClientConfigManager>().Configuration;
+			//Graphics.PreferredBackBufferWidth = config.ScreenWidth;
+			//Graphics.PreferredBackBufferHeight = config.ScreenHeight;
 			Graphics.ApplyChanges();
 
 			(_stateManager = ServiceManager.Resolve<StateManager>()).Initialize(this);

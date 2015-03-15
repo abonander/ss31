@@ -6,7 +6,6 @@ using Lidgren.Network;
 using SS31.Common;
 using SS31.Common.Service;
 using SS31.Common.Network;
-using SS31.Server.Config;
 
 namespace SS31.Server
 {
@@ -51,10 +50,10 @@ namespace SS31.Server
 				return true;
 
 			// TODO: Initialization stuff
-			ServiceManager.Resolve<ServerConfigManager>().Initialize("server.cfg");
-			var config = ServiceManager.Resolve<ServerConfigManager>().Configuration;
-			ServerName = config.ServerName;
-			TickRate = config.ServerTickRate;
+			//ServiceManager.Resolve<ServerConfigManager>().Initialize("server.cfg");
+			//var config = ServiceManager.Resolve<ServerConfigManager>().Configuration;
+			//ServerName = config.ServerName;
+			//TickRate = config.ServerTickRate;
 
 			Initialized = true;
 			return true;
