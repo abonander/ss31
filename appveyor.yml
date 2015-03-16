@@ -1,9 +1,0 @@
-version: 0.1.{build}
-before_build:
-- nuget restore SS31.Common\packages.config -SolutionDirectory Build\Win32\
-build:
-  project: Build/Win32/Win32.sln
-  verbosity: minimal
-notifications:
-  - provider: Webhook
-    url: https://webhooks.gitter.im/e/765a5ded59064b8968a2
