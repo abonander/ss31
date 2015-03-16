@@ -65,6 +65,9 @@
     <Compile Include="..\SS31.Common\Input\IInputManager.cs" />
     <Compile Include="..\SS31.Common\Network\NetSide.cs" />
     <Compile Include="..\SS31.Common\IO\Data\DataLanguage.cs" />
+    <Compile Include="..\SS31.Common\Config\IConfiguration.cs" />
+    <Compile Include="..\SS31.Common\Config\ConfigurationManager.cs" />
+    <Compile Include="..\SS31.Common\Config\Attribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="..\SS31.Common\Network\" />
