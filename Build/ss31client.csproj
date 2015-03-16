@@ -51,7 +51,6 @@
     <Compile Include="..\SS31.Client\State\State.cs" />
     <Compile Include="..\SS31.Client\State\StateManager.cs" />
     <Compile Include="..\SS31.Client\State\States\GameState.cs" />
-<<<<<<< HEAD
     <Compile Include="..\SS31.Client\Config\ClientConfirguration.cs" />
     <Compile Include="..\SS31.Client\Config\ClientConfigManager.cs" />
     <Compile Include="..\SS31.Client\UI\Event.cs" />
