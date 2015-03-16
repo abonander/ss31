@@ -1,4 +1,4 @@
-## ss31 [![Build status](https://ci.appveyor.com/api/projects/status/pqht5nwba1a26m8k?svg=true)](https://ci.appveyor.com/project/cybergeek94/ss31)
+## ss31 [![Build Status](https://travis-ci.org/ss31/ss31.svg?branch=master)](https://travis-ci.org/ss31/ss31)
 Remake of the cult classic Space Station 13, now with C# and [Monogame](http://www.monogame.net/), made cross platform by the [Mono Framework](http://www.mono-project.com/).
 
 Social
