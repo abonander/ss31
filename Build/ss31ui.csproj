@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>SS31.Client.UI</RootNamespace>
     <AssemblyName>ss31ui</AssemblyName>
-    <BaseDirectory>..\..\SS31.Client.UI</BaseDirectory>
+    <BaseDirectory>..\SS31.Client.UI</BaseDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,7 +41,7 @@
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\Build\Win32\packages\MonoGame.Binaries.3.2.0\build\net40\MonoGame.Binaries.targets" Condition="Exists('..\Build\Win32\packages\MonoGame.Binaries.3.2.0\build\net40\MonoGame.Binaries.targets')" />
+  <Import Project="..\Build\packages\MonoGame.Binaries.3.2.0\build\net40\MonoGame.Binaries.targets" Condition="Exists('..\Build\packages\MonoGame.Binaries.3.2.0\build\net40\MonoGame.Binaries.targets')" />
   <ItemGroup>
     <ProjectReference Include="ss31common.csproj">
       <Project>{AC7A5C09-8C67-494B-B048-EAEAC5CD0E96}</Project>
@@ -49,19 +49,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="..\..\SS31.Client.UI\Properties\" />
-    <Folder Include="..\..\SS31.Client.UI\Render\" />
-    <Folder Include="..\..\SS31.Client.UI\Widget\" />
-    <Folder Include="..\..\SS31.Client.UI\Layout\" />
+    <Folder Include="..\SS31.Client.UI\Properties\" />
+    <Folder Include="..\SS31.Client.UI\Render\" />
+    <Folder Include="..\SS31.Client.UI\Widget\" />
+    <Folder Include="..\SS31.Client.UI\Layout\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\SS31.Client.UI\Properties\AssemblyInfo.cs" />
-    <Compile Include="..\..\SS31.Client.UI\UIManager.cs" />
-    <Compile Include="..\..\SS31.Client.UI\Render\RenderManager.cs" />
-    <Compile Include="..\..\SS31.Client.UI\Widget\Widget.cs" />
-    <Compile Include="..\..\SS31.Client.UI\InputManager.cs" />
-    <Compile Include="..\..\SS31.Client.UI\Event.cs" />
-    <Compile Include="..\..\SS31.Client.UI\Widget\WidgetContainer.cs" />
-    <Compile Include="..\..\SS31.Client.UI\Layout\Layout.cs" />
+    <Compile Include="..\SS31.Client.UI\Properties\AssemblyInfo.cs" />
+    <Compile Include="..\SS31.Client.UI\UIManager.cs" />
+    <Compile Include="..\SS31.Client.UI\Render\RenderManager.cs" />
+    <Compile Include="..\SS31.Client.UI\Widget\Widget.cs" />
+    <Compile Include="..\SS31.Client.UI\InputManager.cs" />
+    <Compile Include="..\SS31.Client.UI\Event.cs" />
+    <Compile Include="..\SS31.Client.UI\Widget\WidgetContainer.cs" />
+    <Compile Include="..\SS31.Client.UI\Layout\Layout.cs" />
   </ItemGroup>
 </Project>
