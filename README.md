@@ -15,6 +15,29 @@ Authors
 * johnku1: Programmer
 * Starrider814: 3D Modeler
 
+Cloning
+-
+
+Once content begins to appear in the `ss31-content` repository, it will be necessary to pull in the submodule during the build process.
+
+If your Git is up to date, you can grab all submodules by cloning with the `--recursive` flag:
+
+    git clone --recursive https://github.com/ss31/ss31
+
+To update your existing repository:
+
+    git pull
+    git submodule update --init
+
+#####Updating the `ss31-content` Reference:
+When the `ss31-content` repo is updated, the submodule reference in this repo will need to be updated to point to the new commit.
+
+This can be done by running the following command (using latest Git):
+
+    git submodule update --remote --merge
+
+And then commit and push the changed files to this repository (pull request recommended).
+
 License
 -
 All human-readable source code materials in this repository are licensed under the GPL, version 3.
