@@ -2,4 +2,5 @@ language: csharp
 solution: Build/SS31.sln
 install:
   - nuget restore SS31.Common/packages.config -SolutionDirectory Build/
-webhooks: https://webhooks.gitter.im/e/e16eb7ad58cd32da5f2b
+notifications:
+  webhooks: https://webhooks.gitter.im/e/e16eb7ad58cd32da5f2b
