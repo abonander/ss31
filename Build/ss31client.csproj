@@ -69,6 +69,10 @@
       <Project>{AC7A5C09-8C67-494B-B048-EAEAC5CD0E96}</Project>
       <Name>ss31common</Name>
     </ProjectReference>
+    <ProjectReference Include="ss31common.csproj">
+      <Project>{AC7A5C09-8C67-494B-B048-EAEAC5CD0E96}</Project>
+      <Name>ss31common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="..\SS31.Client\Input\" />
