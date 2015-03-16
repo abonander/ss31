@@ -50,15 +50,20 @@
     <Compile Include="..\SS31.Client\State\States\GameState.cs" />
     <Compile Include="..\SS31.Client\Config\ClientConfirguration.cs" />
     <Compile Include="..\SS31.Client\Config\ClientConfigManager.cs" />
+    <Compile Include="..\SS31.Client\UI\Event.cs" />
+    <Compile Include="..\SS31.Client\UI\InputManager.cs" />
+    <Compile Include="..\SS31.Client\UI\UIManager.cs" />
+    <Compile Include="..\SS31.Client\UI\Layout\Layout.cs" />
+    <Compile Include="..\SS31.Client\UI\Render\RenderManager.cs" />
+    <Compile Include="..\SS31.Client\UI\Widget\Text.cs" />
+    <Compile Include="..\SS31.Client\UI\Widget\Widget.cs" />
+    <Compile Include="..\SS31.Client\UI\Widget\WidgetContainer.cs" />
+    <Compile Include="..\SS31.Client\UI\Widget\Simple\Image.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ss31common.csproj">
       <Project>{AC7A5C09-8C67-494B-B048-EAEAC5CD0E96}</Project>
       <Name>ss31common</Name>
-    </ProjectReference>
-    <ProjectReference Include="ss31ui.csproj">
-      <Project>{6499D561-FF69-42A8-8AE4-1CEC2D348514}</Project>
-      <Name>ss31ui</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -67,5 +72,6 @@
     <Folder Include="..\SS31.Client\State\" />
     <Folder Include="..\SS31.Client\State\States\" />
     <Folder Include="..\SS31.Client\Config\" />
+    <Folder Include="..\SS31.Client\UI\" />
   </ItemGroup>
 </Project>
