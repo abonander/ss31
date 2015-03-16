@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 using OpenTK.Graphics.OpenGL;
 
 namespace SS31.Client.UI
@@ -20,11 +21,14 @@ namespace SS31.Client.UI
 
 		internal GraphicsDevice GraphicsDevice { get; private set; } // The graphics device for the application
 		internal SpriteBatch SpriteBatch { get; private set; } // The spritebatch used specifically by this library
+		internal ContentManager Content { get; private set; }
 
 		public Rectangle Viewport { get { return GraphicsDevice.Viewport.Bounds; } } // Get the bounds of the viewport
+
+		public SpriteFont DefaultFont { get; set; }
 		#endregion
 
-		public RenderManager(GraphicsDevice device)
+		public RenderManager(GraphicsDevice device, ContentManager content)
 		{
 			if (Instance != null)
 				throw new InvalidOperationException("Cannot have more than one instance of RenderManager.");
@@ -36,6 +40,7 @@ namespace SS31.Client.UI
 
 			GraphicsDevice = device;
 			SpriteBatch = new SpriteBatch(device);
+			Content = content;
 
 			_renderTarget = new RenderTarget2D(
 				device,
@@ -49,6 +54,8 @@ namespace SS31.Client.UI
 			_stencilDepth = 0;
 			_maskTexture = new Texture2D(device, 1, 1);
 			_maskTexture.SetData(new []{ Color.Black });
+
+			// DefaultFont = Content.Load<SpriteFont>("Arial");
 
 			_disposed = false;
 		}

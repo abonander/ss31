@@ -53,7 +53,7 @@ namespace SS31.Client
 			_inputManager = ServiceManager.Resolve<InputManager>();
 
 			_netManager = ServiceManager.Resolve<NetManager>();
-			(_uiManager = ServiceManager.Resolve<UIManager>()).Initialize(GraphicsDevice, _inputManager);
+			(_uiManager = ServiceManager.Resolve<UIManager>()).Initialize(GraphicsDevice, _inputManager, Content);
 
 			// TODO: Switch this out when we get an actual main menu system and whatnot going
 			_stateManager.SwitchTo<GameState>();

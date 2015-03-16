@@ -24,7 +24,7 @@ namespace SS31.Client.UI
 		Rectangle AbsoluteInputArea { get; }
 
 		Point Position { get; set; }
-		Point AbsolutePosition{ get; }
+		Point AbsolutePosition { get; }
 	}
 
 	public abstract class Widget : IWidget
@@ -218,7 +218,10 @@ namespace SS31.Client.UI
 		public abstract void Draw(SpriteBatch batch);
 
 		// Called when any changes are made that would affect layout
-		protected virtual void onResize() { } // TODO: This may need to call onResize() for children, don't know yet...
+		protected virtual void onResize() 
+		{
+			_innerArea = new Rectangle(OuterArea.X + _leftPadding, OuterArea.Y + _topPadding, OuterArea.Width - (_leftPadding + _rightPadding), OuterArea.Height - (_topPadding + _bottomPadding));
+		} 
 
 		// TODO: This region is a GIANT UNREADABLE FUCKING MESS OF CODE AND COMMENTS. Clean this up at some point.
 		#region Input Management
