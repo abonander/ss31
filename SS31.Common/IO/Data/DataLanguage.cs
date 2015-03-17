@@ -6,7 +6,6 @@ namespace SS31.Common.IO
 	public enum DataLanguage
 	{
 		Json,
-		Yaml,
-		Xml
+		Yaml
 	}
 }

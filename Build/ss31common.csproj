@@ -68,6 +68,11 @@
     <Compile Include="..\SS31.Common\Config\IConfiguration.cs" />
     <Compile Include="..\SS31.Common\Config\ConfigurationManager.cs" />
     <Compile Include="..\SS31.Common\Config\Attribute.cs" />
+    <Compile Include="..\SS31.Common\IO\Data\ORM\ORMObject.cs" />
+    <Compile Include="..\SS31.Common\IO\Data\ORM\ORMNode.cs" />
+    <Compile Include="..\SS31.Common\IO\Data\ORM\ORMDocument.cs" />
+    <Compile Include="..\SS31.Common\IO\Data\ORM\ORMList.cs" />
+    <Compile Include="..\SS31.Common\IO\Data\ORM\ORMException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="..\SS31.Common\Network\" />
@@ -76,6 +81,7 @@
     <Folder Include="..\SS31.Common\Config\" />
     <Folder Include="..\SS31.Common\Input\" />
     <Folder Include="..\SS31.Common\IO\" />
+    <Folder Include="..\SS31.Common\IO\Data\ORM\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SS31.Common\packages.config" />
