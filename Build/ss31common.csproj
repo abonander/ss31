@@ -73,6 +73,8 @@
     <Compile Include="..\SS31.Common\IO\Data\ORM\ORMDocument.cs" />
     <Compile Include="..\SS31.Common\IO\Data\ORM\ORMList.cs" />
     <Compile Include="..\SS31.Common\IO\Data\ORM\ORMException.cs" />
+    <Compile Include="..\SS31.Common\IO\Data\Parse\Json.cs" />
+    <Compile Include="..\SS31.Common\IO\Data\ORM\ORMNodeType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="..\SS31.Common\Network\" />
@@ -82,6 +84,7 @@
     <Folder Include="..\SS31.Common\Input\" />
     <Folder Include="..\SS31.Common\IO\" />
     <Folder Include="..\SS31.Common\IO\Data\ORM\" />
+    <Folder Include="..\SS31.Common\IO\Data\Parse\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SS31.Common\packages.config" />

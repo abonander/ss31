@@ -35,8 +35,8 @@ namespace SS31.Common.IO.ORM
 	}
 
 	// List of ORMDictionarys
-	public class ORMDictionaryList : ORMList<ORMDictionary>
+	public class ORMDictionaryList : ORMList<ORMMap>
 	{
-		public ORMDictionaryList(string name, List<ORMDictionary> lst = null) : base(name, lst) { }
+		public ORMDictionaryList(string name, List<ORMMap> lst = null) : base(name, lst) { }
 	}
 }

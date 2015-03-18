@@ -7,13 +7,15 @@ namespace SS31.Common.IO.ORM
 	public interface IORMNode
 	{
 		string Name { get; }
+		ORMNodeType Type { get; }
 	}
 
 	// Represents a data node in an Object Representation Model tree
-	public class ORMNode<T> : IORMNode
+	public abstract class ORMNode<T> : IORMNode
 	{
 		public string Name { get; private set; }
 		public T Value { get; set; }
+		public abstract ORMNodeType Type { get; }
 
 		protected ORMNode(string name, T initialValue = default(T))
 		{
@@ -30,25 +32,41 @@ namespace SS31.Common.IO.ORM
 	// Node for an integer value
 	public class ORMInteger : ORMNode<int>
 	{
+		public override ORMNodeType Type { get { return ORMNodeType.Integer; } }
+
 		public ORMInteger(string name, int i) : base (name, i) { }
 	}
 
 	// Node for a floating point value
 	public class ORMDecimal : ORMNode<double>
 	{
+		public override ORMNodeType Type { get { return ORMNodeType.Decimal; } }
+
 		public ORMDecimal(string name, double d) : base(name, d) { }
 	}
 
 	// Node for a string value
 	public class ORMString : ORMNode<string>
 	{
+		public override ORMNodeType Type { get { return ORMNodeType.String; } }
+
 		public ORMString(string name, string s) : base(name, s) { }
 	}
 
 	// Node for a boolean value
 	public class ORMBoolean : ORMNode<bool>
 	{
+		public override ORMNodeType Type { get { return ORMNodeType.Boolean; } }
+
 		public ORMBoolean(string name, bool b) : base(name, b) { }
+	}
+
+	// Node for a null value
+	public class ORMNull : ORMNode<object>
+	{
+		public override ORMNodeType Type { get { return ORMNodeType.Null; } }
+
+		public ORMNull(string name) : base(name, null) { }
 	}
 
 	// Node for a list of nodes of the same type.
@@ -56,6 +74,8 @@ namespace SS31.Common.IO.ORM
 	public class ORMList<T> : ORMNode<List<T>>
 		where T : IORMNode
 	{
+		public override ORMNodeType Type { get { return ORMNodeType.List; } }
+
 		public ORMList(string name, List<T> lst = null) : base(name, lst) 
 		{
 			if (lst == null)
@@ -77,9 +97,11 @@ namespace SS31.Common.IO.ORM
 	}
 
 	// Node for an associative list of nodes
-	public class ORMDictionary : ORMNode<Dictionary<string, IORMNode>>
+	public class ORMMap : ORMNode<Dictionary<string, IORMNode>>
 	{
-		public ORMDictionary(string name, Dictionary<string, IORMNode> dict = null) : base (name, dict)
+		public override ORMNodeType Type { get { return ORMNodeType.Map; } }
+
+		public ORMMap(string name, Dictionary<string, IORMNode> dict = null) : base (name, dict)
 		{
 			if (dict == null)
 				Value = new Dictionary<string, IORMNode>();
