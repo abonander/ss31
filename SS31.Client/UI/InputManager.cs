@@ -193,7 +193,7 @@ namespace SS31.Client.UI
 						return ret;
 				}
 			
-				return root; // This is for a weird case where root has children, but they are all outside of the parent's input area
+				return root; // If none of the children were hovered over
 			}
 	}
 

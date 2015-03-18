@@ -46,6 +46,7 @@ namespace SS31.Client
 			ServiceManager.Resolve<ClientConfigurationManager>().Initialize("client.cfg");
 			ServiceManager.Resolve<ClientConfigurationManager>().Load();
 			var config = ServiceManager.Resolve<ClientConfigurationManager>().Configuration;
+			this.IsMouseVisible = true;
 			Graphics.PreferredBackBufferWidth = config.ScreenWidth;
 			Graphics.PreferredBackBufferHeight = config.ScreenHeight;
 			Graphics.ApplyChanges();

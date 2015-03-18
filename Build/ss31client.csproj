@@ -56,12 +56,20 @@
     <Compile Include="..\SS31.Client\UI\UIManager.cs" />
     <Compile Include="..\SS31.Client\UI\Layout\Layout.cs" />
     <Compile Include="..\SS31.Client\UI\Render\RenderManager.cs" />
-    <Compile Include="..\SS31.Client\UI\Widget\Text.cs" />
     <Compile Include="..\SS31.Client\UI\Widget\Widget.cs" />
     <Compile Include="..\SS31.Client\UI\Widget\WidgetContainer.cs" />
     <Compile Include="..\SS31.Client\UI\Widget\Simple\Image.cs" />
     <Compile Include="..\SS31.Client\Config\ClientConfiguration.cs" />
     <Compile Include="..\SS31.Client\Config\ClientConfigurationManager.cs" />
+    <Compile Include="..\SS31.Client\UI\Render\Text.cs" />
+    <Compile Include="..\SS31.Client\UI\Render\BorderedTexture.cs" />
+    <Compile Include="..\SS31.Client\UI\Widget\Simple\Window.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="ss31common.csproj">
+      <Project>{AC7A5C09-8C67-494B-B048-EAEAC5CD0E96}</Project>
+      <Name>ss31common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="..\SS31.Client\Input\" />
@@ -69,6 +77,7 @@
     <Folder Include="..\SS31.Client\State\" />
     <Folder Include="..\SS31.Client\State\States\" />
     <Folder Include="..\SS31.Client\UI\" />
+	<Folder Include="..\SS31.Client\UI\Widget\" />
     <Folder Include="..\SS31.Client\Config\" />
   </ItemGroup>
   <ItemGroup>
