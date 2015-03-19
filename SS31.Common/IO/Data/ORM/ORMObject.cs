@@ -5,16 +5,13 @@ using System.Linq;
 namespace SS31.Common.IO.ORM
 {
 	// Class that represents the root of a set of data parsed from Json or Yaml
-	public class ORMObject
+	public class ORMObject : ORMMap
 	{
-		public Dictionary<string, IORMNode> Children { get; private set; }
+		public Dictionary<string, IORMNode> Children { get { return Value; } }
 
-		public int Count { get { return Children.Count; } }
-		public bool Empty { get { return Children.Count < 1; } }
-
-		public ORMObject()
+		public ORMObject(string name = null) : base(name)
 		{
-			Children = new Dictionary<string, IORMNode>();
+
 		}
 
 		public void AddChild(IORMNode node)

@@ -6,14 +6,14 @@ namespace SS31.Common.IO.ORM
 	// Base interface allowing for lists of generics
 	public interface IORMNode
 	{
-		string Name { get; }
+		string Name { get; set; }
 		ORMNodeType Type { get; }
 	}
 
 	// Represents a data node in an Object Representation Model tree
 	public abstract class ORMNode<T> : IORMNode
 	{
-		public string Name { get; private set; }
+		public string Name { get; set; }
 		public T Value { get; set; }
 		public abstract ORMNodeType Type { get; }
 
@@ -71,23 +71,22 @@ namespace SS31.Common.IO.ORM
 
 	// Node for a list of nodes of the same type.
 	// Specific types of lists are defined in ORMList.cs
-	public class ORMList<T> : ORMNode<List<T>>
-		where T : IORMNode
+	public class ORMList : ORMNode<List<IORMNode>>
 	{
 		public override ORMNodeType Type { get { return ORMNodeType.List; } }
 
-		public ORMList(string name, List<T> lst = null) : base(name, lst) 
+		public ORMList(string name, List<IORMNode> lst = null) : base(name, lst) 
 		{
 			if (lst == null)
-				Value = new List<T>();
+				Value = new List<IORMNode>();
 		}
 
-		public T Get(int i)
+		public IORMNode Get(int i)
 		{
 			return Value[i];
 		}
 
-		public T this[int i]
+		public IORMNode this[int i]
 		{
 			get { return Value[i]; }
 			set { Value[i] = value; }
@@ -132,5 +131,6 @@ namespace SS31.Common.IO.ORM
 		}
 
 		public int Count { get { return Value.Count; } }
+		public bool Empty { get { return Value.Count < 1; } }
 	}
 }

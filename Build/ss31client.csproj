@@ -64,17 +64,17 @@
     <Compile Include="..\SS31.Client\Config\ClientConfigurationManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="ss31common.csproj">
-      <Project>{AC7A5C09-8C67-494B-B048-EAEAC5CD0E96}</Project>
-      <Name>ss31common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="..\SS31.Client\Input\" />
     <Folder Include="..\SS31.Client\Network\" />
     <Folder Include="..\SS31.Client\State\" />
     <Folder Include="..\SS31.Client\State\States\" />
     <Folder Include="..\SS31.Client\UI\" />
     <Folder Include="..\SS31.Client\Config\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="ss31common.csproj">
+      <Project>{AC7A5C09-8C67-494B-B048-EAEAC5CD0E96}</Project>
+      <Name>ss31common</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
