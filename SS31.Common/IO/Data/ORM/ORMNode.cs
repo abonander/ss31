@@ -30,11 +30,11 @@ namespace SS31.Common.IO.ORM
 	}
 
 	// Node for an integer value
-	public class ORMInteger : ORMNode<int>
+	public class ORMInteger : ORMNode<long>
 	{
 		public override ORMNodeType Type { get { return ORMNodeType.Integer; } }
 
-		public ORMInteger(string name, int i) : base (name, i) { }
+		public ORMInteger(string name, long i) : base (name, i) { }
 	}
 
 	// Node for a floating point value

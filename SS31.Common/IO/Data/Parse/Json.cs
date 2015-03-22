@@ -36,7 +36,101 @@ namespace SS31.Common.IO
 			return ret;
 		}
 
+		public static string ToJsonString(ORMObject obj)
+		{
+			try
+			{
+				JTokenWriter writer = new JTokenWriter();
+				writer.WriteStartObject();
+				foreach (IORMNode node in obj.Children.Values)
+				{
+					parseNode(node, writer);
+				}
+				writer.WriteEndObject();
+				return writer.Token.ToString();
+			}
+			catch (Exception ex)
+			{
+				Logger.LogError("The json parser encountered an exception while trying to generate a Json string from an ORM tree.");
+				Logger.LogException(ex);
+				return "{}";
+			}
+		}
+
 		#region Private Helper Methods
+		private static void writeValueNode<T>(string name, T value, JTokenWriter writer)
+		{
+			if (!String.IsNullOrEmpty(name))
+				writer.WritePropertyName(name);
+			writer.WriteValue(value);
+		}
+
+		private static void parseNode(IORMNode node, JTokenWriter writer)
+		{
+			if (node == null)
+				throw new ArgumentNullException("node");
+			if (writer == null)
+				throw new ArgumentNullException("writer");
+
+			switch (node.Type)
+			{
+			case ORMNodeType.Boolean:
+				{
+					ORMBoolean value = (ORMBoolean)node;
+					writeValueNode<bool>(value.Name, value.Value, writer);
+					return;
+				}
+			case ORMNodeType.Decimal:
+				{
+					ORMDecimal value = (ORMDecimal)node;
+					writeValueNode<double>(value.Name, value.Value, writer);
+					return;
+				}
+			case ORMNodeType.Integer:
+				{
+					ORMInteger value = (ORMInteger)node;
+					writeValueNode<long>(value.Name, value.Value, writer);
+					return;
+				}
+			case ORMNodeType.Null:
+				{
+					ORMNull value = (ORMNull)node;
+					if (!String.IsNullOrEmpty(value.Name))
+						writer.WritePropertyName(value.Name);
+					writer.WriteNull();
+					return;
+				}
+			case ORMNodeType.String:
+				{
+					ORMString value = (ORMString)node;
+					writeValueNode<string>(value.Name, value.Value, writer);
+					return;
+				}
+			case ORMNodeType.List:
+				{
+					ORMList list = (ORMList)node;
+					if (!String.IsNullOrEmpty(list.Name))
+						writer.WritePropertyName(list.Name);
+					writer.WriteStartArray();
+					foreach (IORMNode n in list.Value)
+						parseNode(n, writer);
+					writer.WriteEndArray();
+					return;
+				}
+			case ORMNodeType.Map:
+				{
+					ORMMap map = (ORMMap)node;
+					if (!String.IsNullOrEmpty(map.Name))
+						writer.WritePropertyName(map.Name);
+					writer.WriteStartObject();
+					foreach (IORMNode n in map.Value.Values)
+						parseNode(n, writer);
+					writer.WriteEndObject();
+					return;
+				}
+			}
+		}
+
 		private static IORMNode parseToken(JToken t)
 		{
 			if (t == null)
@@ -64,7 +158,7 @@ namespace SS31.Common.IO
 				case JTokenType.Integer:
 					{
 						JValue val = (JValue)t;
-						return new ORMInteger("", (int)val.Value);
+						return new ORMInteger("", (long)val.Value);
 					}
 				case JTokenType.Null:
 					{
