@@ -51,10 +51,11 @@ namespace SS31.Server
 				return true;
 
 			// TODO: Initialization stuff
-			ServiceManager.Resolve<ServerConfigManager>().Initialize("server.cfg");
-			var config = ServiceManager.Resolve<ServerConfigManager>().Configuration;
+			ServiceManager.Resolve<ServerConfigurationManager>().Initialize("server.cfg");
+			ServiceManager.Resolve<ServerConfigurationManager>().Load();
+			var config = ServiceManager.Resolve<ServerConfigurationManager>().Configuration;
 			ServerName = config.ServerName;
-			TickRate = config.ServerTickRate;
+			TickRate = config.TargetTPS;
 
 			Initialized = true;
 			return true;
