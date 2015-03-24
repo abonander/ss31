@@ -2,6 +2,8 @@
 using System.IO;
 using System.Reflection;
 using SS31.Common.Service;
+using SS31.Common.IO;
+using SS31.Common.IO.ORM;
 
 namespace SS31.Common.Config
 {
@@ -46,7 +48,9 @@ namespace SS31.Common.Config
 			{
 				try
 				{
-					// TODO: read from the settings file
+					Reset();
+					Configuration = JsonParser.DeserializeObject<T>(File.ReadAllText(ConfigPath));
+					Logger.LogInfo("Loaded configuration settings from the disk.");
 				}
 				catch (Exception ex)
 				{
@@ -81,7 +85,9 @@ namespace SS31.Common.Config
 
 			try
 			{
-				// TODO: write into the settings file
+				string json = JsonParser.SerializeObject<T>(Configuration);
+				File.WriteAllText(ConfigPath, json);
+				Logger.LogInfo("Saved configuration settings to the disk.");
 			}
 			catch (Exception ex)
 			{

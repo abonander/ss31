@@ -107,6 +107,7 @@ namespace SS31.Common
 
 			string ts = "[" + getTimeStamp() + "]";
 			string mes =
+				"\tType: \"" + e.GetType() + "\"\n" +
 				"\tMessage: \"" + e.Message + "\"\n" + 
 				"\tStack Trace:\n" + 
 				"\t" + e.StackTrace.Replace("\n", "\n\t\t");

@@ -8,13 +8,14 @@ namespace SS31.Common.IO.ORM
 	{
 		string Name { get; set; }
 		ORMNodeType Type { get; }
+		object Value { get; set; }
 	}
 
 	// Represents a data node in an Object Representation Model tree
 	public abstract class ORMNode<T> : IORMNode
 	{
 		public string Name { get; set; }
-		public T Value { get; set; }
+		public object Value { get; set; }
 		public abstract ORMNodeType Type { get; }
 
 		protected ORMNode(string name, T initialValue = default(T))
@@ -25,7 +26,12 @@ namespace SS31.Common.IO.ORM
 
 		public static implicit operator T(ORMNode<T> n)
 		{
-			return n.Value;
+			return (T)n.Value;
+		}
+
+		public T GetValue()
+		{
+			return (T)Value;
 		}
 	}
 
@@ -83,16 +89,16 @@ namespace SS31.Common.IO.ORM
 
 		public IORMNode Get(int i)
 		{
-			return Value[i];
+			return GetValue()[i];
 		}
 
 		public IORMNode this[int i]
 		{
-			get { return Value[i]; }
-			set { Value[i] = value; }
+			get { return GetValue()[i]; }
+			set { GetValue()[i] = value; }
 		}
 
-		public int Count { get { return Value.Count; } }
+		public int Count { get { return GetValue().Count; } }
 	}
 
 	// Node for an associative list of nodes
@@ -108,12 +114,12 @@ namespace SS31.Common.IO.ORM
 
 		public bool HasNode(string s)
 		{
-			return Value.ContainsKey(s);
+			return GetValue().ContainsKey(s);
 		}
 
 		public IORMNode Get(string s)
 		{
-			return Value[s];
+			return GetValue()[s];
 		}
 
 		public void AddNode(IORMNode node)
@@ -121,16 +127,16 @@ namespace SS31.Common.IO.ORM
 			if (node == null)
 				throw new ArgumentNullException("node");
 
-			Value.Add(node.Name, node);
+			GetValue().Add(node.Name, node);
 		}
 
 		public IORMNode this[string s]
 		{
-			get { return Value[s]; }
-			set { Value[s] = value; }
+			get { return GetValue()[s]; }
+			set { GetValue()[s] = value; }
 		}
 
-		public int Count { get { return Value.Count; } }
-		public bool Empty { get { return Value.Count < 1; } }
+		public int Count { get { return GetValue().Count; } }
+		public bool Empty { get { return GetValue().Count < 1; } }
 	}
 }

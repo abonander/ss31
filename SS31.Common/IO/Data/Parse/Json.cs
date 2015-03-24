@@ -22,7 +22,7 @@ namespace SS31.Common.IO
 					foreach (JToken t in obj.Children())
 					{
 						IORMNode node = parseToken(t);
-						ret.Value.Add(node.Name, node);
+						ret.GetValue().Add(node.Name, node);
 					}
 				}
 			}
@@ -57,6 +57,35 @@ namespace SS31.Common.IO
 			}
 		}
 
+		public static string SerializeObject<T>(T obj)
+		{
+			try
+			{
+				return JsonConvert.SerializeObject(obj, Formatting.Indented);
+			}
+			catch (Exception ex)
+			{
+				Logger.LogError("Could not serialize the object. An exception was thrown.");
+				Logger.LogException(ex);
+				return "{}";
+			}
+		}
+
+		public static T DeserializeObject<T>(string s)
+		{
+			try
+			{
+				T obj = JsonConvert.DeserializeObject<T>(s);
+				return obj;
+			}
+			catch (Exception ex)
+			{
+				Logger.LogError("Could not deserialize the json string. An exception was thrown.");
+				Logger.LogException(ex);
+				return default(T);
+			}
+		}
+
 		#region Private Helper Methods
 		private static void writeValueNode<T>(string name, T value, JTokenWriter writer)
 		{
@@ -77,19 +106,19 @@ namespace SS31.Common.IO
 			case ORMNodeType.Boolean:
 				{
 					ORMBoolean value = (ORMBoolean)node;
-					writeValueNode<bool>(value.Name, value.Value, writer);
+					writeValueNode<bool>(value.Name, value.GetValue(), writer);
 					return;
 				}
 			case ORMNodeType.Decimal:
 				{
 					ORMDecimal value = (ORMDecimal)node;
-					writeValueNode<double>(value.Name, value.Value, writer);
+					writeValueNode<double>(value.Name, value.GetValue(), writer);
 					return;
 				}
 			case ORMNodeType.Integer:
 				{
 					ORMInteger value = (ORMInteger)node;
-					writeValueNode<long>(value.Name, value.Value, writer);
+					writeValueNode<long>(value.Name, value.GetValue(), writer);
 					return;
 				}
 			case ORMNodeType.Null:
@@ -103,7 +132,7 @@ namespace SS31.Common.IO
 			case ORMNodeType.String:
 				{
 					ORMString value = (ORMString)node;
-					writeValueNode<string>(value.Name, value.Value, writer);
+					writeValueNode<string>(value.Name, value.GetValue(), writer);
 					return;
 				}
 			case ORMNodeType.List:
@@ -112,7 +141,7 @@ namespace SS31.Common.IO
 					if (!String.IsNullOrEmpty(list.Name))
 						writer.WritePropertyName(list.Name);
 					writer.WriteStartArray();
-					foreach (IORMNode n in list.Value)
+					foreach (IORMNode n in list.GetValue())
 						parseNode(n, writer);
 					writer.WriteEndArray();
 					return;
@@ -123,7 +152,7 @@ namespace SS31.Common.IO
 					if (!String.IsNullOrEmpty(map.Name))
 						writer.WritePropertyName(map.Name);
 					writer.WriteStartObject();
-					foreach (IORMNode n in map.Value.Values)
+					foreach (IORMNode n in map.GetValue().Values)
 						parseNode(n, writer);
 					writer.WriteEndObject();
 					return;
@@ -176,7 +205,7 @@ namespace SS31.Common.IO
 						foreach (JToken token in array.Children())
 						{
 							IORMNode cnode = parseToken(token);
-							list.Value.Add(cnode);
+							list.GetValue().Add(cnode);
 						}
 						return list;
 					}
@@ -187,7 +216,7 @@ namespace SS31.Common.IO
 						foreach (JToken token in obj.Children())
 						{
 							IORMNode node = parseToken(token);
-							map.Value.Add(node.Name, node);
+							map.GetValue().Add(node.Name, node);
 						}
 						return map;
 					}

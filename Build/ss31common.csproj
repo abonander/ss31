@@ -30,14 +30,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>packages\Newtonsoft.Json.6.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>packages\MonoGame.Binaries.3.2.3-alpha\build\net40\AnyCPU\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Lidgren.Network">
       <HintPath>packages\MonoGame.Binaries.Net.3.2.3-alpha\build\net40\AnyCPU\Lidgren.Network.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.6.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -63,7 +63,6 @@
     <Compile Include="..\SS31.Common\IO\Data\DataLanguage.cs" />
     <Compile Include="..\SS31.Common\Config\IConfiguration.cs" />
     <Compile Include="..\SS31.Common\Config\ConfigurationManager.cs" />
-    <Compile Include="..\SS31.Common\Config\Attribute.cs" />
     <Compile Include="..\SS31.Common\IO\Data\ORM\ORMObject.cs" />
     <Compile Include="..\SS31.Common\IO\Data\ORM\ORMNode.cs" />
     <Compile Include="..\SS31.Common\IO\Data\ORM\ORMDocument.cs" />

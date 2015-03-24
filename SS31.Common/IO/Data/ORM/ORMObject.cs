@@ -7,7 +7,7 @@ namespace SS31.Common.IO.ORM
 	// Class that represents the root of a set of data parsed from Json or Yaml
 	public class ORMObject : ORMMap
 	{
-		public Dictionary<string, IORMNode> Children { get { return Value; } }
+		public Dictionary<string, IORMNode> Children { get { return GetValue(); } }
 
 		public ORMObject(string name = null) : base(name)
 		{
