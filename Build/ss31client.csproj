@@ -64,6 +64,8 @@
     <Compile Include="..\SS31.Client\UI\Render\Text.cs" />
     <Compile Include="..\SS31.Client\UI\Render\BorderedTexture.cs" />
     <Compile Include="..\SS31.Client\UI\Widget\Simple\Window.cs" />
+    <Compile Include="..\SS31.Client\Content\ResourceCache.cs" />
+    <Compile Include="..\SS31.Client\Content\ContentManagerService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ss31common.csproj">
@@ -77,13 +79,8 @@
     <Folder Include="..\SS31.Client\State\" />
     <Folder Include="..\SS31.Client\State\States\" />
     <Folder Include="..\SS31.Client\UI\" />
-	<Folder Include="..\SS31.Client\UI\Widget\" />
+    <Folder Include="..\SS31.Client\UI\Widget\" />
     <Folder Include="..\SS31.Client\Config\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="ss31common.csproj">
-      <Project>{AC7A5C09-8C67-494B-B048-EAEAC5CD0E96}</Project>
-      <Name>ss31common</Name>
-    </ProjectReference>
+    <Folder Include="..\SS31.Client\Content\" />
   </ItemGroup>
 </Project>
