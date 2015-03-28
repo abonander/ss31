@@ -64,8 +64,8 @@
     <Compile Include="..\SS31.Client\UI\Render\Text.cs" />
     <Compile Include="..\SS31.Client\UI\Render\BorderedTexture.cs" />
     <Compile Include="..\SS31.Client\UI\Widget\Simple\Window.cs" />
-    <Compile Include="..\SS31.Client\Content\ResourceCache.cs" />
     <Compile Include="..\SS31.Client\Content\ContentManagerService.cs" />
+    <Compile Include="..\SS31.Client\Content\ContentCache.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ss31common.csproj">
