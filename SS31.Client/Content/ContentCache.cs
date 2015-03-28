@@ -32,6 +32,14 @@ namespace SS31.Client.Content
 		public int ContentCount { get { return TextureCount + FontCount + SoundEffectCount + SongCount + EffectCount; } }
 
 		public readonly string Name;
+
+		public object this[string name]
+		{
+			get
+			{
+				return GetContent(name);
+			}
+		}
 		#endregion
 
 		public ContentCache(string name = null)
@@ -258,6 +266,92 @@ namespace SS31.Client.Content
 			return _effects.ContainsKey(name);
 		}
 		#endregion
+
+		public object GetContent(string name)
+		{
+			if (_textures.ContainsKey(name))
+				return _textures[name];
+			if (_fonts.ContainsKey(name))
+				return _fonts[name];
+			if (_soundEffects.ContainsKey(name))
+				return _soundEffects[name];
+			if (_songs.ContainsKey(name))
+				return _songs[name];
+			if (_effects.ContainsKey(name))
+				return _effects[name];
+
+			return null;
+		}
+		public T GetContent<T>(string name)
+			where T : class
+		{
+			Type type = typeof(T);
+			if (type == typeof(Texture2D))
+				return GetTexture2D(name) as T;
+			if (type == typeof(Texture3D))
+				return GetTexture3D(name) as T;
+			if (type == typeof(TextureCube))
+				return GetTextureCube(name) as T;
+			if (type == typeof(SpriteFont))
+				return GetSpriteFont(name) as T;
+			if (type == typeof(SoundEffect))
+				return GetSoundEffect(name) as T;
+			if (type == typeof(Song))
+				return GetSong(name) as T;
+			if (type == typeof(Effect))
+				return GetEffect(name) as T;
+
+			throw new Exception("The type " + typeof(T).Name + " is not a content type.");
+		}
+		public Texture2D GetTexture2D(string name)
+		{
+			if (_textures.ContainsKey(name))
+				return (Texture2D)_textures[name];
+
+			return null;
+		}
+		public Texture3D GetTexture3D(string name)
+		{
+			if (_textures.ContainsKey(name))
+				return (Texture3D)_textures[name];
+
+			return null;
+		}
+		public TextureCube GetTextureCube(string name)
+		{
+			if (_textures.ContainsKey(name))
+				return (TextureCube)_textures[name];
+
+			return null;
+		}
+		public SpriteFont GetSpriteFont(string name)
+		{
+			if (_fonts.ContainsKey(name))
+				return _fonts[name];
+
+			return null;
+		}
+		public SoundEffect GetSoundEffect(string name)
+		{
+			if (_soundEffects.ContainsKey(name))
+				return _soundEffects[name];
+
+			return null;
+		}
+		public Song GetSong(string name)
+		{
+			if (_songs.ContainsKey(name))
+				return _songs[name];
+
+			return null;
+		}
+		public Effect GetEffect(string name)
+		{
+			if (_effects.ContainsKey(name))
+				return _effects[name];
+
+			return null;
+		}
 		#endregion
 
 		// Unloads and disposes all resources tied to this cache

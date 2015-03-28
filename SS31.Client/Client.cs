@@ -6,6 +6,7 @@ using SS31.Client.Network;
 using SS31.Common.Service;
 using SS31.Client.UI;
 using SS31.Client.Config;
+using SS31.Client.Content;
 
 namespace SS31.Client
 {
@@ -57,9 +58,6 @@ namespace SS31.Client
 			_netManager = ServiceManager.Resolve<NetManager>();
 			(_uiManager = ServiceManager.Resolve<UIManager>()).Initialize(GraphicsDevice, _inputManager, Content);
 
-			// TODO: Switch this out when we get an actual main menu system and whatnot going
-			_stateManager.SwitchTo<GameState>();
-
 			base.Initialize();
 			_profiler.EndBlock();
 		}
@@ -73,7 +71,10 @@ namespace SS31.Client
 
 			SpriteBatch = new SpriteBatch(GraphicsDevice);
 
-			// TODO: Load the content things
+			ServiceManager.Resolve<ContentManagerService>().Initialize(Content);
+
+			// TODO: Switch this out when we get an actual main menu system and whatnot going
+			_stateManager.SwitchTo<GameState>();
 
 			_profiler.EndBlock();
 		}
