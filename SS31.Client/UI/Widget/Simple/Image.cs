@@ -22,7 +22,8 @@ namespace SS31.Client.UI.Widgets
 
 		public override void Draw(SpriteBatch batch)
 		{
-			batch.Draw(Icon, AbsoluteInnerArea, Color.White);
+			if (Icon != null)
+				batch.Draw(Icon, AbsoluteInnerArea, Color.White);
 		}
 	}
 }

@@ -23,7 +23,7 @@ namespace SS31.Client.UI
 	}
 
 	// A base class for widgets that contain other widgets, with the default IWidgetContainer implementation
-	public class WidgetContainer : Widget, IWidgetContainer
+	public abstract class WidgetContainer : Widget, IWidgetContainer
 	{
 		#region Members
 		public List<Widget> Children { get; private set; }

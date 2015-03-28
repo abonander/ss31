@@ -69,6 +69,16 @@ namespace SS31.Client.UI
 
 			ManagedWidgets.Add(w);
 		}
+
+		// Remove and dispose of a widget
+		public void RemoveWidget(Widget w)
+		{
+			if (!ManagedWidgets.Contains(w))
+				return;
+				
+			w.Dispose();
+			ManagedWidgets.Remove(w);
+		}
 		#endregion
 
 		#region Dispose
