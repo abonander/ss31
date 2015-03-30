@@ -6,7 +6,7 @@ Social
 * Reddit: [/r/SS31](http://www.reddit.com/r/SS31), discussions and official news forum.
 * Waffle.io: [waffle.io](https://waffle.io/ss31/ss31), our agile development board, see who is working on what.
 * Gitter: [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ss31/ss31), come join the devs as they make boring chat about the work.
-* AppVeyor: [Build Status](https://ci.appveyor.com/project/cybergeek94/ss31), see the status of our latest builds, and download to test for yourself.
+* TravisCI: [Build Status](https://travis-ci.org/ss31/ss31), see the status of our latest builds, and download to test for yourself.
 
 Authors
 -
