@@ -12,7 +12,7 @@ namespace SS31.Client.UI
 	{
 		#region Members
 		internal RenderManager RenderManager { get; private set; }
-		internal InputManager InputManager { get; private set; }
+		internal UIInputManager InputManager { get; private set; }
 
 		internal List<Widget> ManagedWidgets { get; private set; } // A list of the base widgets, as the starting point for the update and draw calls
 
@@ -24,10 +24,10 @@ namespace SS31.Client.UI
 			ManagedWidgets = new List<Widget>();
 		}
 
-		public void Initialize(GraphicsDevice device, IInputManager input, ContentManager content)
+		public void Initialize(GraphicsDevice device, ContentManager content)
 		{
 			RenderManager = new RenderManager(device, content);
-			InputManager = new InputManager(ManagedWidgets, input);
+			InputManager = new UIInputManager(ManagedWidgets);
 		}
 
 		public void Update(GameTime gameTime)

@@ -4,7 +4,7 @@ using SS31.Client.Network;
 using SS31.Common.Network;
 using SS31.Client.UI.Widgets;
 
-namespace SS31.Client
+namespace SS31.Client.State.States
 {
 	// This is just the test state, until we get a  nice splash screen and main menu and whatnot going.
 	public class GameState : State

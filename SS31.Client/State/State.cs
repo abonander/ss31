@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using SS31.Common;
 using SS31.Common.Service;
 
-namespace SS31.Client
+namespace SS31.Client.State
 {
 	// Base class that represents a "scene" in the game, only one can be active at a time.
 	// For allowing different states, i.e. "Main Menu" -> "Multiplayer Menu" -> "In Game" ect.

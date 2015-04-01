@@ -2,8 +2,8 @@
 using System.IO;
 using System.Reflection;
 using SS31.Common.Service;
-using SS31.Common.IO;
-using SS31.Common.IO.ORM;
+using SS31.Common.Parse;
+using SS31.Common.Parse.ORM;
 
 namespace SS31.Common.Config
 {

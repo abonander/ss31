@@ -1,7 +1,7 @@
 ﻿using System;
 using Lidgren.Network;
 
-namespace SS31.Server
+namespace SS31.Server.Network
 {
 	// A record of a client currently connected to the server
 	public class Client

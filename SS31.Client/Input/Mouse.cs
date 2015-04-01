@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Input;
 
-namespace SS31.Common
+namespace SS31.Client.Input
 {
 	// Since Monogame does not have an enum for mouse buttons, we will make our own.
 	// Does work as flags.

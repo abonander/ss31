@@ -4,6 +4,7 @@ using SS31.Common;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SS31.Client.Input;
 
 namespace SS31.Client.UI
 {
@@ -40,8 +41,8 @@ namespace SS31.Client.UI
 
 		public readonly string Identifier; // String that identitifies this widget uniquely
 
-		public bool IsHoveredWidget { get { return InputManager.Instance.HoveredWidget == this; } }
-		public bool IsFocusedWidget { get { return InputManager.Instance.FocusedWidget == this; } }
+		public bool IsHoveredWidget { get { return UIInputManager.Instance.HoveredWidget == this; } }
+		public bool IsFocusedWidget { get { return UIInputManager.Instance.FocusedWidget == this; } }
 
 		#region Properties
 		// The inner area of the widget, accounting for the outer area and the padding, and the stecil rectangle for the children components

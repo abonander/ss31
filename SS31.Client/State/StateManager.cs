@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 using SS31.Common;
 using SS31.Common.Service;
 
-namespace SS31.Client
+namespace SS31.Client.State
 {
 	// Manages the active state and a list of cached states
 	public class StateManager : GameService

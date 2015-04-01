@@ -5,11 +5,11 @@ using Microsoft.Xna.Framework.Input;
 using SS31.Common;
 using SS31.Common.Service;
 
-namespace SS31.Client
+namespace SS31.Client.Input
 {
 	// Higher level input class, provides support for both polling and event based input
 	// Methods here are pretty self explanitory
-	public class InputManager : IInputManager
+	public class InputManager : GameService
 	{
 		#region Members
 		public KeyboardState PreviousKeyState { get; private set; }
@@ -46,8 +46,6 @@ namespace SS31.Client
 		public event MouseScrollEvent MouseScrolled; // The mouse wheel value is changed
 
 		private Profiler _profiler;
-		private bool _disposed;
-		public bool Disposed { get { return _disposed; } }
 		#endregion
 
 		public void Update(GameTime gameTime)
@@ -396,19 +394,13 @@ namespace SS31.Client
 			}
 
 			_profiler = ServiceManager.Resolve<Profiler>();
-			_disposed = false;
 		}
 		~InputManager()
 		{
 			Dispose(false);
 		}
 
-		public void Dispose()
-		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
-		}
-		public void Dispose(bool disposing)
+		public override void Dispose(bool disposing)
 		{
 			if (!Disposed && disposing)
 			{
@@ -430,7 +422,7 @@ namespace SS31.Client
 				MouseScrolled = null;
 			}
 
-			_disposed = true;
+			base.Dispose(disposing);
 		}
 		#endregion
 	}

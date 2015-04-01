@@ -1,5 +1,5 @@
 ﻿using System;
-using SS31.Common;
+using SS31.Client.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 

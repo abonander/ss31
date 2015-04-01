@@ -4,7 +4,7 @@ using Lidgren.Network;
 using SS31.Common;
 using SS31.Common.Service;
 
-namespace SS31.Server
+namespace SS31.Server.Network
 {
 	// Represents the lower level server object. This interfaces directly with Lidgren with sending messages.
 	// This should not be messed with too much.

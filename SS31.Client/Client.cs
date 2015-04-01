@@ -7,6 +7,9 @@ using SS31.Common.Service;
 using SS31.Client.UI;
 using SS31.Client.Config;
 using SS31.Client.Content;
+using SS31.Client.State;
+using SS31.Client.State.States;
+using SS31.Client.Input;
 
 namespace SS31.Client
 {
@@ -56,7 +59,7 @@ namespace SS31.Client
 			_inputManager = ServiceManager.Resolve<InputManager>();
 
 			_netManager = ServiceManager.Resolve<NetManager>();
-			(_uiManager = ServiceManager.Resolve<UIManager>()).Initialize(GraphicsDevice, _inputManager, Content);
+			(_uiManager = ServiceManager.Resolve<UIManager>()).Initialize(GraphicsDevice, Content);
 
 			base.Initialize();
 			_profiler.EndBlock();

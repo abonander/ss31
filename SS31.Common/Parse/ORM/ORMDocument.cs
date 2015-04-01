@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SS31.Common.IO.ORM
+namespace SS31.Common.Parse.ORM
 {
 	// Contains an instance of a document of Yaml or Json, with a ORM tree representing the data.
 	public class ORMDocument

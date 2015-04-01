@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SS31.Common.IO
+namespace SS31.Common.Parse
 {
 	// Enum of the 3 languages that we support parsing and serializing.
 	public enum DataLanguage

@@ -56,29 +56,25 @@
     <Compile Include="..\SS31.Common\SharedConstants.cs" />
     <Compile Include="..\SS31.Common\Network\NetEnums.cs" />
     <Compile Include="..\SS31.Common\Utility\Exception.cs" />
-    <Compile Include="..\SS31.Common\Input\Event.cs" />
-    <Compile Include="..\SS31.Common\Input\Mouse.cs" />
-    <Compile Include="..\SS31.Common\Input\IInputManager.cs" />
     <Compile Include="..\SS31.Common\Network\NetSide.cs" />
-    <Compile Include="..\SS31.Common\IO\Data\DataLanguage.cs" />
     <Compile Include="..\SS31.Common\Config\IConfiguration.cs" />
     <Compile Include="..\SS31.Common\Config\ConfigurationManager.cs" />
-    <Compile Include="..\SS31.Common\IO\Data\ORM\ORMObject.cs" />
-    <Compile Include="..\SS31.Common\IO\Data\ORM\ORMNode.cs" />
-    <Compile Include="..\SS31.Common\IO\Data\ORM\ORMDocument.cs" />
-    <Compile Include="..\SS31.Common\IO\Data\ORM\ORMException.cs" />
-    <Compile Include="..\SS31.Common\IO\Data\Parse\Json.cs" />
-    <Compile Include="..\SS31.Common\IO\Data\ORM\ORMNodeType.cs" />
+    <Compile Include="..\SS31.Common\Parse\DataLanguage.cs" />
+    <Compile Include="..\SS31.Common\Parse\ORM\ORMDocument.cs" />
+    <Compile Include="..\SS31.Common\Parse\ORM\ORMException.cs" />
+    <Compile Include="..\SS31.Common\Parse\ORM\ORMNode.cs" />
+    <Compile Include="..\SS31.Common\Parse\ORM\ORMNodeType.cs" />
+    <Compile Include="..\SS31.Common\Parse\ORM\ORMObject.cs" />
+    <Compile Include="..\SS31.Common\Parse\Parse\Json.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="..\SS31.Common\Network\" />
     <Folder Include="..\SS31.Common\Service\" />
     <Folder Include="..\SS31.Common\Utility\" />
     <Folder Include="..\SS31.Common\Config\" />
-    <Folder Include="..\SS31.Common\Input\" />
-    <Folder Include="..\SS31.Common\IO\" />
     <Folder Include="..\SS31.Common\IO\Data\ORM\" />
     <Folder Include="..\SS31.Common\IO\Data\Parse\" />
+    <Folder Include="..\SS31.Common\Parse\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\SS31.Common\packages.config" />

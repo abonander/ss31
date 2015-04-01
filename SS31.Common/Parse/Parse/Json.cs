@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using SS31.Common.IO.ORM;
+using SS31.Common.Parse.ORM;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace SS31.Common.IO
+namespace SS31.Common.Parse
 {
 	public static class JsonParser
 	{

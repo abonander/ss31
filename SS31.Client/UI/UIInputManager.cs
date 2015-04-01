@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using SS31.Common;
+using SS31.Common.Service;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using SS31.Client.Input;
 
 namespace SS31.Client.UI
 {
 	// This is not like the input manager for client. This takes information from the clients Input Manager, which is passed
 	// into UIManager in Initialize(). This also keeps track of the widget currently selected, and any changes to the mouse position,
 	// so it can send out input events to the proper widgets.
-	internal class InputManager
+	internal class UIInputManager
 	{
-		public static InputManager Instance { get; private set; }
+		public static UIInputManager Instance { get; private set; }
 
 		#region Members
-		public IInputManager BaseInputManager { get; private set; } // This is the input manager service on the client
+		public InputManager BaseInputManager { get; private set; } // This is the input manager service
 
 		public KeyboardState CurrentKeyState { get { return BaseInputManager.CurrentKeyState; } }
 		public KeyboardState PreviousKeyState { get { return BaseInputManager.PreviousKeyState; } }
@@ -65,7 +67,7 @@ namespace SS31.Client.UI
 		private List<Widget> _managedWidgets;
 		#endregion
 
-		public InputManager(List<Widget> widgets, IInputManager manager)
+		public UIInputManager(List<Widget> widgets)
 		{
 			if (widgets == null)
 				throw new ArgumentNullException("widgets");
@@ -73,7 +75,7 @@ namespace SS31.Client.UI
 			Instance = this;
 
 			_managedWidgets = widgets;
-			BaseInputManager = manager;
+			BaseInputManager = ServiceManager.Resolve<InputManager>();
 			_mousePosition = Point.Zero;
 			_focusedParent = null;
 

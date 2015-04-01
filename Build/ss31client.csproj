@@ -52,7 +52,6 @@
     <Compile Include="..\SS31.Client\State\StateManager.cs" />
     <Compile Include="..\SS31.Client\State\States\GameState.cs" />
     <Compile Include="..\SS31.Client\UI\Event.cs" />
-    <Compile Include="..\SS31.Client\UI\InputManager.cs" />
     <Compile Include="..\SS31.Client\UI\UIManager.cs" />
     <Compile Include="..\SS31.Client\UI\Layout\Layout.cs" />
     <Compile Include="..\SS31.Client\UI\Render\RenderManager.cs" />
@@ -66,6 +65,9 @@
     <Compile Include="..\SS31.Client\UI\Widget\Simple\Window.cs" />
     <Compile Include="..\SS31.Client\Content\ContentManagerService.cs" />
     <Compile Include="..\SS31.Client\Content\ContentCache.cs" />
+    <Compile Include="..\SS31.Client\Input\Event.cs" />
+    <Compile Include="..\SS31.Client\Input\Mouse.cs" />
+    <Compile Include="c:\Users\Sean\Documents\Projects\ss31\SS31.Client\UI\UIInputManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="ss31common.csproj">

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SS31.Common.IO.ORM
+namespace SS31.Common.Parse.ORM
 {
 	// Base interface allowing for lists of generics
 	public interface IORMNode

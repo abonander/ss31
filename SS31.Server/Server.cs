@@ -7,6 +7,7 @@ using SS31.Common;
 using SS31.Common.Service;
 using SS31.Common.Network;
 using SS31.Server.Config;
+using SS31.Server.Network;
 
 namespace SS31.Server
 {

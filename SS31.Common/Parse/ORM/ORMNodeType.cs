@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SS31.Common.IO.ORM
+namespace SS31.Common.Parse.ORM
 {
 	public enum ORMNodeType
 	{

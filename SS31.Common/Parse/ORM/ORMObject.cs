@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SS31.Common.IO.ORM
+namespace SS31.Common.Parse.ORM
 {
 	// Class that represents the root of a set of data parsed from Json or Yaml
 	public class ORMObject : ORMMap
