@@ -1,4 +1,5 @@
 *.userprefs
 /Build/obj
 /Build/bin
-./packages
+/packages
+/obj
