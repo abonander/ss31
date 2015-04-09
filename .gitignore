@@ -1,5 +1,3 @@
 *.userprefs
-/Build/obj
-/Build/bin
-/packages
-/obj
+*.sln
+*.csproj

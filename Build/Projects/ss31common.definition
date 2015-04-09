@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Name="ss31common" Path="SS31.Common" Type="Library">
+  <References>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </References>
+  <Files>
+  </Files>
+</Project>
