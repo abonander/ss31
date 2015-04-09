@@ -1,9 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Name="ss31common" Path="SS31.Common" Type="Library">
+  <Properties>
+    <RootNamespace>SS31.Common</RootNamespace>
+    <!-- Get rid of the goddamn xml warnings -->
+    <NoWarn>1591</NoWarn>
+  </Properties>
   <References>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="prebuilt" />
   </References>
-  <Files />
+  <Files>
+    <Compile Include="Config\ConfigurationManager.cs" />
+    <Compile Include="Config\IConfiguration.cs" />
+    <Compile Include="Input\Event.cs" />
+    <Compile Include="Input\IInputManager.cs" />
+    <Compile Include="Input\Mouse.cs" />
+    <Compile Include="IO\Data\DataLanguage.cs" />
+    <Compile Include="IO\Data\ORM\ORMDocument.cs" />
+    <Compile Include="IO\Data\ORM\ORMException.cs" />
+    <Compile Include="IO\Data\ORM\ORMNode.cs" />
+    <Compile Include="IO\Data\ORM\ORMNodeType.cs" />
+    <Compile Include="IO\Data\ORM\ORMObject.cs" />
+    <Compile Include="IO\Data\Parse\Json.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="Network\IncomingNetMessageArgs.cs" />
+    <Compile Include="Network\INetManager.cs" />
+    <Compile Include="Network\IPEntry.cs" />
+    <Compile Include="Network\NetEnums.cs" />
+    <Compile Include="Network\NetSide.cs" />
+    <Compile Include="Profiler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\GameService.cs" />
+    <Compile Include="Service\IGameService.cs" />
+    <Compile Include="Service\ServiceManager.cs" />
+    <Compile Include="SharedConstants.cs" />
+    <Compile Include="Utility\Exception.cs" />
+  </Files>
 </Project>

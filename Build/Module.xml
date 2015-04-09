@@ -4,6 +4,7 @@
   <ModuleAssemblies />
   <DefaultAction>Generate</DefaultAction>
   <DisableSynchronisation>false</DisableSynchronisation>
+  <DefaultStartupProject>ss31client</DefaultStartupProject>
   <SupportedPlatforms>Windows,Linux</SupportedPlatforms>
   <DefaultWindowsPlatforms>Windows</DefaultWindowsPlatforms>
   <DefaultLinuxPlatforms>Linux</DefaultLinuxPlatforms>
