@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ExternalProject Name="prebuilt">
 
-  <Binary Name="Monogame.Framework" Path="ThirdParty/Monogame.Framework.dll" />
+  <Binary Name="MonoGame.Framework" Path="ThirdParty/MonoGame.Framework.dll" />
   <Binary Name="Lidgren.Network" Path="ThirdParty/Lidgren.Network.dll" />
   <Binary Name="OpenTK" Path="ThirdParty/OpenTK.dll" />
 
