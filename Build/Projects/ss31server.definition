@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Name="ss31common" Path="SS31.Common" Type="Library">
+<Project Name="ss31server" Path="SS31.Server" Type="Console">
   <References>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="ss31common" />
     <Reference Include="prebuilt" />
   </References>
   <Files />

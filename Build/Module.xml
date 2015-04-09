@@ -3,6 +3,8 @@
   <Name>SS31</Name>
   <ModuleAssemblies />
   <DefaultAction>Generate</DefaultAction>
-  <GenerateNuGetRepositories>true</GenerateNuGetRepositories>
-  <DisableSynchronisation>true</DisableSynchronisation>
+  <DisableSynchronisation>false</DisableSynchronisation>
+  <SupportedPlatforms>Windows,Linux</SupportedPlatforms>
+  <DefaultWindowsPlatforms>Windows</DefaultWindowsPlatforms>
+  <DefaultLinuxPlatforms>Linux</DefaultLinuxPlatforms>
 </ModuleInfo>

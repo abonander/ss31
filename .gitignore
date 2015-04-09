@@ -1,3 +1,7 @@
 *.userprefs
 *.sln
 *.csproj
+*.speccache
+*/bin
+*/obj
+packages
