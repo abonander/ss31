@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Name="ss31server" Path="SS31.Server" Type="Console">
+  <Properties>
+    <RootNamespace>SS31.Server</RootNamespace>
+    <!-- Get rid of the goddamn xml warnings -->
+    <NoWarn>1591</NoWarn>
+  </Properties>
+  <References>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="ss31common" />
+    <Reference Include="prebuilt" />
+  </References>
+  <Files>
+    <Compile Include="Config\ServerConfiguration.cs" />
+    <Compile Include="Config\ServerConfigurationManager.cs" />
+    <Compile Include="Network\Client.cs" />
+    <Compile Include="Network\SSNetServer.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server.cs" />
+  </Files>
+</Project>

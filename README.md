@@ -13,12 +13,15 @@ Authors
 * AlmostPete: Programmer
 * cybergeek94: Programmer
 * johnku1: Programmer
+* imdodrill: Programmer
 * Starrider814: 3D Modeler
 
-Cloning
+Building and Contributing
 -
 
-We removed the ss31-content submodule since we are doing content differently now. We will update this readme with new information as we figure out the new information.
+We use [Protobuild](http://protobuild.org) as a build generation system. You don't need anything to make it work. You will, however, need a C# capable IDE (MonoDevelop/XamarinStudio or Visual Studio).
+
+Details on building and contributing can be found on our [Github Wiki](https://github.com/ss31/ss31/wiki).
 
 License
 -

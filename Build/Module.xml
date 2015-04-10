@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModuleInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>SS31</Name>
+  <ModuleAssemblies />
+  <DefaultAction>Generate</DefaultAction>
+  <DisableSynchronisation>false</DisableSynchronisation>
+  <DefaultStartupProject>ss31client</DefaultStartupProject>
+  <SupportedPlatforms>Windows,Linux</SupportedPlatforms>
+  <DefaultWindowsPlatforms>Windows</DefaultWindowsPlatforms>
+  <DefaultLinuxPlatforms>Linux</DefaultLinuxPlatforms>
+</ModuleInfo>

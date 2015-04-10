@@ -1,6 +1,9 @@
 language: csharp
-solution: Build/SS31.sln
+solution: SS31.Linux.sln
 install:
-  - nuget restore SS31.Common/packages.config -SolutionDirectory Build/
+  - mono Protobuild.exe --generate Linux
+  - nuget restore SS31.Common/packages.config -SolutionDirectory ./
+script:
+  - xbuild SS31.Linux.sln /p:Configuration=Release
 notifications:
   webhooks: https://webhooks.gitter.im/e/e16eb7ad58cd32da5f2b

@@ -1,4 +1,7 @@
-/Build/*.userprefs
-/Build/obj
-/Build/bin
-/Build/packages
+*.userprefs
+*.sln
+*.csproj
+*.speccache
+*/bin
+*/obj
+packages
