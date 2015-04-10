@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using SS31.Common;
-using SS31.Common.Service;
+using SS31.Core;
+using SS31.Core.Service;
+using SS31.Core.Input;
 
 namespace SS31.Client
 {

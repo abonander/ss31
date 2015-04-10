@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using SS31.Common.Service;
+using SS31.Core.Service;
 using SS31.Client.Network;
-using SS31.Common.Network;
+using SS31.Core.Network;
 using SS31.Client.UI.Widgets;
 
 namespace SS31.Client

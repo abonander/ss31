@@ -1,5 +1,5 @@
 ﻿using System;
-using SS31.Common.Config;
+using SS31.Core.Config;
 
 namespace SS31.Server.Config
 {

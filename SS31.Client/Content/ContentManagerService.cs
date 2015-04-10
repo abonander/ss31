@@ -5,8 +5,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Content;
-using SS31.Common.Service;
-using SS31.Common;
+using SS31.Core.Service;
+using SS31.Core;
 
 namespace SS31.Client.Content
 {
