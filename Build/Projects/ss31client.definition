@@ -8,7 +8,7 @@
   <References>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="ss31common" />
+    <Reference Include="ss31core" />
     <Reference Include="prebuilt" />
   </References>
   <Files>

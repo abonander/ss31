@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using SS31.Common;
+using SS31.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using SS31.Core.Input;
 
 namespace SS31.Client.UI
 {

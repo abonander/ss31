@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using SS31.Common;
-using SS31.Common.Service;
+using SS31.Core;
+using SS31.Core.Service;
 
 namespace SS31.Client
 {
