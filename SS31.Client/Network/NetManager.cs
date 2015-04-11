@@ -1,7 +1,7 @@
 ﻿using System;
-using SS31.Common.Network;
-using SS31.Common;
-using SS31.Common.Service;
+using SS31.Core.Network;
+using SS31.Core;
+using SS31.Core.Service;
 using Lidgren.Network;
 using Microsoft.Xna.Framework;
 

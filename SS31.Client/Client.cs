@@ -1,12 +1,13 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SS31.Common;
+using SS31.Core;
 using SS31.Client.Network;
-using SS31.Common.Service;
+using SS31.Core.Service;
 using SS31.Client.UI;
 using SS31.Client.Config;
 using SS31.Client.Content;
+using SS31.Core.Network;
 
 namespace SS31.Client
 {

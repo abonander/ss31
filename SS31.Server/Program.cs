@@ -1,6 +1,7 @@
 ﻿using System;
-using SS31.Common;
-using SS31.Common.Service;
+using SS31.Core;
+using SS31.Core.Service;
+using SS31.Core.Network;
 
 namespace SS31.Server
 {

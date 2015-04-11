@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using SS31.Common;
-using SS31.Common.Service;
+using SS31.Core;
+using SS31.Core.Service;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using SS31.Core.Input;
 
 namespace SS31.Client.UI
 {

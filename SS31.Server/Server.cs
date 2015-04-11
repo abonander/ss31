@@ -3,9 +3,9 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Lidgren.Network;
-using SS31.Common;
-using SS31.Common.Service;
-using SS31.Common.Network;
+using SS31.Core;
+using SS31.Core.Service;
+using SS31.Core.Network;
 using SS31.Server.Config;
 
 namespace SS31.Server

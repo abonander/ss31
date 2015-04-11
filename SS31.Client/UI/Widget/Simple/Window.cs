@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SS31.Common;
+using SS31.Core;
 
 namespace SS31.Client.UI.Widgets
 {
